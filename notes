@@ -1,0 +1,36 @@
+channel
+section
+    content
+        recent
+        popular
+        single playlist
+        multi playlist
+        (mix content)
+        etc...
+    layout
+        hor
+        ver
+    neeeded res.
+        video id / title / thumb
+        channel id / title / logo
+        playlist id / title / logo
+watch
+    video id
+    title
+
+results
+
+youtube-channel
+    props
+        title / thumbnail / id / sections
+youtube-section 
+youtube-content-link 
+    box 
+    rectangle
+    text / logo / title / (channel)
+youtube-playlist 
+youtube-video
+
+abutube-feed
+    youtube-section
+    title
