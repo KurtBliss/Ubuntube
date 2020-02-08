@@ -9,10 +9,21 @@ $router->map('GET', '/', function () {
     include "views/home.php";
 });
 
-$router->map('GET', '/results/[i:id]', function ($id) {
+$router->map("GET", "/watch", function () {
+    global $title;
+    $title = "Watch - Abutube";
+    include "views/youtube/watch.php";
+});
+
+$router->map('GET', "/channel/[a:id]", function ($id) {
+    global $title;
+    $title = "Channel - Abutube";
+    include "views/youtube/channel.php";
+});
+
+$router->map('GET', '/results', function () {
     global $title;
     $title = "Results - Abutube";
-    echo $id;
     include "views/youtube/results.php";
 });
 
