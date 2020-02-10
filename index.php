@@ -1,8 +1,7 @@
 <?php
-
-require "content.php";
-require "views/header.php";
 $devKey = json_decode(file_get_contents("secret.json"))->devKey;
+require "views/header.php";
+require "content.php";
 
 echo <<<HTML
 <html lang="en">
