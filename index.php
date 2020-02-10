@@ -2,7 +2,6 @@
 
 require "content.php";
 require "views/header.php";
-$devKey = json_decode(file_get_contents("secret.json"))->devKey;
 
 echo <<<HTML
 <html lang="en">
