@@ -3,6 +3,8 @@ require 'vendor/autoload.php';
 
 $router = new AltoRouter();
 
+$content;
+
 $router->map('GET', '/', function () {
     global $title;
     $title = "Abutube";
@@ -17,6 +19,7 @@ $router->map("GET", "/watch", function () {
 
 $router->map('GET', "/channel/[a:id]", function ($id) {
     global $title;
+    echo $id;
     $title = "Channel - Abutube";
     include "views/youtube/channel.php";
 });
