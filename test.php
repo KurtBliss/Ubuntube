@@ -1,11 +1,10 @@
 <?php
 
 echo "running test.php\n";
+// require_once "classes/abutube.php";
+// $abutube = new abutube;
 
-require_once "classes/abutube.php";
-
-$abutube = new abutube;
-
-$abutube->search();
+// echo "$abutube->search();
 
 // $abutube->hi();
+
