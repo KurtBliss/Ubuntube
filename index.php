@@ -1,7 +1,7 @@
 <?php
-$devKey = json_decode(file_get_contents("secret.json"))->devKey;
-require "views/header.php";
-require "content.php";
+require_once "abutube.php";
+require_once "views/header.php";
+require_once "content.php";
 
 echo <<<HTML
 <html lang="en">
@@ -9,7 +9,7 @@ echo <<<HTML
         <meta charset="utf-8">
         <meta name="viewport"; content="width=device-width, initial-scale=1.0, user-scalable=no"; />
         <title>$title</title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="/style.css">
         <script src="index.js"></script>
     </head>
     <body>
