@@ -2,14 +2,11 @@
 
 global $title;
 global $content;
+global $abutube;
 
 $q = $_GET["q"];
 
-require_once "classes/abutube.php";
-
-$abutube = new abutube;
-
-$response = $abutube->search($q);
+$response = abutube::search($q);
 
 $results = "";
 $snippet;
