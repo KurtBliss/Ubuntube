@@ -1,3 +1,16 @@
 .sectionTitle {
-  size: 20px;
+  font-size: 20px;
+}
+
+iframe {
+  /* margin-bottom: 10px; */
+}
+
+.watch-channel-thumbnail {
+  display: inline-block;
+}
+
+.watch-channel-title {
+  display: block;
+  font-size: 20px;
 }
