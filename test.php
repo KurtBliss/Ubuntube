@@ -4,11 +4,12 @@ echo "running test.php\n";
 
 require_once "abutube.php";
 
-$response = abutube::channel_data($_GET["id"]);
+// $response = abutube::search($_GET["q"]);
+$response = abutube::search("pokemon%20ruby");
 
-print_r(abutube::playlist_items(
-    $response->items[0]->contentDetails->relatedPlaylists->uploads
-));
+print_r(
+    $response
+);
 
 /*
 
