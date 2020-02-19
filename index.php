@@ -1,6 +1,7 @@
 <?php
 require_once "abutube.php";
 require_once "views/header.php";
+require_once "views/footer.php";
 require_once "content.php";
 
 echo <<<HTML
@@ -15,6 +16,7 @@ echo <<<HTML
     <body>
         $header
         $content
+        $footer
     </body>
 </html>
 HTML;
