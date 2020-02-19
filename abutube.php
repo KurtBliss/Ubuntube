@@ -65,13 +65,28 @@ class abutube
             }
         }
 
-        $encode = "https://www.googleapis.com/youtube/v3/" . $resource . "?key=" .  $_ENV["YOUTUBE_DEV_KEY"] . $parse;
+        $encode = 
+            "https://www.googleapis.com/youtube/v3/" 
+            . $resource 
+            . "?key=" .  $_ENV["YOUTUBE_DEV_KEY"] 
+            . $parse;
 
-        htmlentities($encode);
-        urlencode($encode);
+        // htmlentities($encode);
+        // urlencode($encode);
 
         return json_decode(
-            file_get_contents($encode)
+            abutube::escapefile_url($encode)
         );
     }
+
+    function escapefile_url($url){
+        $parts = parse_url($url);
+        $path_parts = array_map('rawurldecode', explode('/', $parts['path']));
+      
+        return
+          $parts['scheme'] . '://' .
+          $parts['host'] .
+          implode('/', array_map('rawurlencode', $path_parts))
+        ;
+      }
 }
