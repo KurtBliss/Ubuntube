@@ -11,7 +11,7 @@ echo <<<HTML
         <meta name="viewport"; content="width=device-width, initial-scale=1.0, user-scalable=no"; />
         <title>$title</title>
         <link rel="stylesheet" type="text/css" href="/style.css">
-        <script src="index.js"></script>
+        <script src="/index.js"></script>
     </head>
     <body>
         $header
