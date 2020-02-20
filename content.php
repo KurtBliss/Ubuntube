@@ -17,7 +17,7 @@ $router->map("GET", "/watch", function () {
     include "views/youtube/watch.php";
 });
 
-$router->map('GET', "/channel/[a:id]", function ($id) {
+$router->map('GET', "/channel/[*:id]", function ($id) {
     global $title;
     $title = "Channel - Abutube";
     include "views/youtube/channel.php";
