@@ -9,9 +9,9 @@ $title = $response->items[0]->snippet->title;
 $desc = $response->items[0]->snippet->description;
 $thumbnails =  $response->items[0]->snippet->thumbnails;
 
-$thumbnail = $thumbnails->default->url ;
-    // || $thumbnails->high->url 
-    // || $thumbnails->medium->url;
+$thumbnail = $thumbnails->default->url;
+// || $thumbnails->high->url 
+// || $thumbnails->medium->url;
 
 $uploads = abutube::playlist_items(
     $response->items[0]->contentDetails->relatedPlaylists->uploads
@@ -20,7 +20,7 @@ $uploads = abutube::playlist_items(
 $uploadsHTML = "";
 $uploadTitle;
 
-foreach($uploads as $upload) {
+foreach ($uploads as $upload) {
 
     $uploadTitle = $upload->snippet->title;
 
