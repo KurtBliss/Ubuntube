@@ -1,4 +1,8 @@
-/* Body */
+/*** 
+
+    Body 
+
+***/
 html,
 body {
   color: white;
@@ -24,7 +28,30 @@ section {
   padding: 15px;
 }
 
-/* Header  */
+a {
+  color: white;
+}
+
+/* Results */
+.result-item {
+  margin: 10px;
+  font-size: 20px;
+}
+
+.result-item a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.result-item:hover {
+  background-color: #888888;
+}
+
+/* 
+
+    Header
+
+*/
 .header-title {
   font-size: 30px;
   text-align: center;
@@ -49,7 +76,11 @@ section {
   border-radius: 15px;
 }
 
-/* Footer */
+/* 
+
+    Footer 
+
+*/
 body {
   position: relative;
   min-height: 100vh;
