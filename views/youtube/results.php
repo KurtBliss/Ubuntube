@@ -1,26 +1,31 @@
 <?php
 
-global $title;
-global $content;
-global $abutube;
+global $title, $content, $abutube;
 
 $q = $_GET["q"];
 
-$response = abutube::search($q);
+$response = abutube::search(urlencode($q));
 
 $results = "";
-$snippet;
-$resultTitle = "";
-
-foreach($response->items as $item) {
-    if (isset($item->snippet))
+foreach ($response->items as $item) {
+    if (isset($item->snippet)) {
         $resultTitle = $item->snippet->title;
-    else
+
+        if ($item->id->kind == "youtube#video") {
+            $resultLink = "/watch?v=" . $item->id->videoId;
+            $resultType = "video";
+        } else if ($item->id->kind == "youtube#channel") {
+            $resultLink = "/channel/" . $item->id->channelId;
+            $resultType = "channel";
+        }
+    } else {
         $resultTitle = "";
+        $resultType = "Unknown";
+    }
 
     $results .= <<<HTML
-        <div>
-            <p>$resultTitle</p>
+        <div class="result-item result-item-$resultType">
+            <a href="$resultLink">$resultTitle</a> | <span>$resultType</span>
         </div>
     HTML;
 }
@@ -28,7 +33,7 @@ foreach($response->items as $item) {
 $content = <<<HTML
     <main>
         <section>
-            <p>Showing results for $q</p>
+            <p>Showing results for "$q"</p>
             $results
         </section>
     </main>
