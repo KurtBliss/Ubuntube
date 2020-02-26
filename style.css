@@ -6,7 +6,7 @@
 html,
 body {
   color: white;
-  background-color: #303030;
+  background-color: #1f1f1f;
 }
 
 body {
@@ -23,7 +23,7 @@ main h1 {
 }
 
 section {
-  background-color: #404040;
+  background-color: #282828;
   border-radius: 15px;
   padding: 15px;
 }
@@ -53,8 +53,10 @@ a {
 
 */
 .header-title {
+  display: block;
   font-size: 30px;
   text-align: center;
+  text-decoration: none;
   user-select: none;
   margin: 10px 0;
 }
@@ -74,6 +76,10 @@ a {
 .header-nav a:hover {
   background-color: #585858;
   border-radius: 15px;
+}
+
+.searchInput {
+  width: 93%;
 }
 
 /* 
