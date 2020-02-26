@@ -6,14 +6,15 @@ $header = <<<HTML
 <header>
   <!--   Logo   -->
   <label>
-    <p class="header-title">
+    <a href="/" class="header-title">
       BLISSFULTUBE
-    </p>
+    </a>
   </label>
   
   <!--  Navigation  -->
   <nav class="header-nav">
-    <a>home</a> | <a>about</a> | <a>contact</a> | <input id="searchInput" type="text" placeholder="Search.." onkeypress="search(event)">
+    <!-- <a href="/">home</a> | <a>about</a> | <a>contact</a> |  -->
+    <input id="searchInput" class="searchInput" type="text" placeholder="Search.." onkeypress="search(event)">
   </nav>
   <hr> 
 </header>
