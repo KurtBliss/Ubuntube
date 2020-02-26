@@ -2,31 +2,38 @@
 require 'vendor/autoload.php';
 
 $router = new AltoRouter();
+$website_name = "Blissfultube";
 
-$content;
+$content = "";
 
 $router->map('GET', '/', function () {
-    global $title;
-    $title = "Abutube";
+    global $title, $website_name;
+    $title = "$website_name";
     include "views/home.php";
 });
 
 $router->map("GET", "/watch", function () {
-    global $title;
-    $title = "Watch - Abutube";
+    global $title, $website_name;
+    $title = "Watch - $website_name";
     include "views/youtube/watch.php";
 });
 
-$router->map('GET', "/channel/[*:id]", function ($id) {
-    global $title;
-    $title = "Channel - Abutube";
-    include "views/youtube/channel.php";
+$router->map('GET', '/results', function () {
+    global $title, $website_name;
+    $title = "Results - $website_name";
+    include "views/youtube/results.php";
 });
 
-$router->map('GET', '/results', function () {
-    global $title;
-    $title = "Results - Abutube";
-    include "views/youtube/results.php";
+$router->map('GET', "/edit/[*:id]", function ($id) {
+    global $title, $website_name;
+    $title = "Edit - $website_name";
+    include "views/feed/edit.php";
+});
+
+$router->map('GET', "/feed/[*:id]", function ($id) {
+    global $title, $website_name;
+    $title = "Feed - $website_name";
+    include "views/feed/feed.php";
 });
 
 // match current request url
