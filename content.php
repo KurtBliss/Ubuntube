@@ -24,6 +24,12 @@ $router->map('GET', '/results', function () {
     include "views/youtube/results.php";
 });
 
+$router->map('GET', "/channel/[*:id]", function ($id) {
+    global $title, $website_name;
+    $title = "Channel - $website_name";
+    include "views/youtube/channel.php";
+});
+
 $router->map('GET', "/edit/[*:id]", function ($id) {
     global $title, $website_name;
     $title = "Edit - $website_name";
