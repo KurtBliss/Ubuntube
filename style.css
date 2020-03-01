@@ -39,6 +39,10 @@ a {
   font-size: 18px;
 }
 
+.container {
+  position: relative;
+}
+
 /* Results */
 .result-item {
   margin: 10px;
