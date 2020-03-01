@@ -44,10 +44,11 @@ $content = <<<HTML
             <p>$desc</p>
         </section>
         <section class="container">
-            <div>
-                <p class="sectionTitle">Uploads <p>
-                <a href="" class="topright">add to feed</a>
-            </div>
+            <p class="sectionTitle">Uploads <p>
+                <div class="topright">
+                    <a href="" >add to feed</a>
+
+                </div>
             <input type="text" hidden value="$uploadsPlaylist">
             <div>
                 $uploadsHTML
