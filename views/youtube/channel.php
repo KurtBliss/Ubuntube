@@ -13,8 +13,10 @@ $thumbnail = $thumbnails->default->url;
 // || $thumbnails->high->url 
 // || $thumbnails->medium->url;
 
+$uploadsPlaylist = $response->items[0]->contentDetails->relatedPlaylists->uploads;
+
 $uploads = abutube::playlist_items(
-    $response->items[0]->contentDetails->relatedPlaylists->uploads
+    $uploadsPlaylist
 )->items;
 
 $uploadsHTML = "";
@@ -41,8 +43,12 @@ $content = <<<HTML
             <img src=$thumbnail>
             <p>$desc</p>
         </section>
-        <section>
-            <p class="sectionTitle">Uploads<p>
+        <section class="container">
+            <div>
+                <p class="sectionTitle">Uploads <p>
+                <a href="" class="topright">add to feed</a>
+            </div>
+            <input type="text" hidden value="$uploadsPlaylist">
             <div>
                 $uploadsHTML
             </div>
