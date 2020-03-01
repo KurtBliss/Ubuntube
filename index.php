@@ -1,8 +1,8 @@
 <?php
 require_once "abutube.php";
+require_once "content.php";
 require_once "views/header.php";
 require_once "views/footer.php";
-require_once "content.php";
 
 echo <<<HTML
 <html lang="en">
