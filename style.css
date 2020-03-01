@@ -32,6 +32,13 @@ a {
   color: white;
 }
 
+.topright {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+
 /* Results */
 .result-item {
   margin: 10px;
