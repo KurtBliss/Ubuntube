@@ -48,10 +48,8 @@ foreach ($uploads as $upload) {
 
 $script = <<<JS
     var feedsObj = feeds();
-    console.log(feedsObj);
     var pickFeed = "";
     for (const feed in feedsObj) {
-        console.log(feedsObj[feed]);
         pickFeed += "<option value='" + feed + "'>";
         pickFeed += feed + " - " + feedsObj[feed]["name"];
         pickFeed += "</option>";

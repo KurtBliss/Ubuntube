@@ -36,7 +36,6 @@ function feeds(set) {
 */
 function onFeedNew(event) {
   if (event.key === "Enter") {
-    console.log("window (onFeedNew)", window);
     feedsObj = feeds();
     id = document.getElementById("newFeedInput").value;
     feedsObj[id] = { name: id };
@@ -48,7 +47,6 @@ function onFeedNew(event) {
 
 function onFeedName(event, feedId) {
   if (event.key === "Enter") {
-    console.log("window (onFeedName)", window);
     feedsObj = feeds();
     feedsObj[feedId] = {
       name: document.getElementById("feedNameInput").value || "$feedId"
@@ -71,10 +69,10 @@ function feed_add_single_playlist(getFeed, playlistId) {
     };
   } else {
     object_key = feedObj[feed].section.key + 1;
-    object = {
-      ...object,
+    feedObj[feed].section = {
+      ...feedObj[feed].section,
       key: object_key,
-      object_key: { playlistId: playlistId, type: "singlePlaylist" }
+      [object_key]: { playlistId: playlistId, type: "singlePlaylist" }
     };
   }
 
@@ -87,7 +85,6 @@ function feed_add_single_playlist(getFeed, playlistId) {
 
 */
 function renderFeed(data, feedId) {
-  console.log("rendering...");
   document.getElementById("feed-container").innerHTML = "<p>rendering...</p>";
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
