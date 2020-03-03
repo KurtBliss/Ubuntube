@@ -7,17 +7,13 @@ $noFeeds = <<<HTML
 HTML;
 
 $script = <<<JS
-    var feeds = feeds();
+    var feedsObj = feeds();
+    
+    for (const feed in feedsObj) {
 
-    function appendContainer(append, id) {
-        document.getElementById(id).innerHTML += append;
-    }
+        appendContainer('<p><a href=feed/' + feed + '>' + feedsObj[feed]["name"] + '</a></p>', "feeds-list");
 
-    for (const feed in feeds) {
-
-        appendContainer('<p><a href=feed/' + feed + '>' + feeds[feed]["name"] + '</a></p>', "feeds-list");
-
-        console.log(feeds[feed]);
+        console.log(feedsObj[feed]);
     }    
 JS;
 
@@ -28,7 +24,7 @@ $content = <<<HTML
             <div id="feeds-list"></div>
 
             <h1 class="sectionTitle">Make new feed:</h1>
-            <input type="text">
+            <input type="text" id="newFeedInput" onkeypress="onFeedNew(event)">
         </section>
         <script>$script</script>
     </main>

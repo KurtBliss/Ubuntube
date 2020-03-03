@@ -1,7 +1,18 @@
 <?php
 
 global $content;
+
+
 // http://localhost:8080/channel/UCr3cBLTYmIK9kY0F_OdFWFQ
+
+$key = 0;
+
+function incKey()
+{
+    global $key;
+    $key += 1;
+    return $key;
+}
 
 $response = abutube::channel_data($id);
 
@@ -35,6 +46,27 @@ foreach ($uploads as $upload) {
     HTML;
 }
 
+$script = <<<JS
+    var feedsObj = feeds();
+    console.log(feedsObj);
+    var pickFeed = "";
+    for (const feed in feedsObj) {
+        console.log(feedsObj[feed]);
+        pickFeed += "<option value='" + feed + "'>";
+        pickFeed += feed + " - " + feedsObj[feed]["name"];
+        pickFeed += "</option>";
+    }
+    
+    var elements = document.getElementsByClassName("addToFeed");
+
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].innerHTML = pickFeed;
+    }
+
+    
+
+JS;
+
 $content = <<<HTML
     <main>
         <section>
@@ -44,15 +76,17 @@ $content = <<<HTML
             <p>$desc</p>
         </section>
         <section class="container">
-            <p class="sectionTitle">Uploads <p>
-                <div class="topright">
-                    <a href="" >add to feed</a>
-
-                </div>
+            <p class="sectionTitle">
+                Uploads 
+                | <select id="select-$key" class="addToFeed" > 
+                </select>
+                <button onclick="feed_add_single_playlist($key,'$uploadsPlaylist')">add to feed </button>
+            <p>
             <input type="text" hidden value="$uploadsPlaylist">
             <div>
                 $uploadsHTML
             </div>
         </section>
+        <script>$script</script>
     </main>
 HTML;

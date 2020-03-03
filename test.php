@@ -1,18 +1,19 @@
 <?php
 
-echo "running test.php\n";
+$key = 0;
 
-require_once "abutube.php";
+function incKey()
+{
+    global $key;
+    $key += 1;
+    return $key;
+}
 
-// $response = abutube::search($_GET["q"]);
-$response = abutube::search("pokemon%20ruby");
+$html = <<<HTML
+    <button id="button-${incKey()}$key">button</button>
+    <button id="button-${incKey()}$key">button</button>
+    <button id="button-${incKey()}$key">button</button>
+    $key
+HTML;
 
-print_r(
-    $response
-);
-
-/*
-
-Channel Title, Thumbnail
-
-*/
+echo $html;

@@ -14,7 +14,7 @@ $content = <<<HTML
     <main>
         <section>
             <label>feed name</label>
-            <input type="text" id="feedNameInput" onkeypress="onFeedName(event)" value="$feedId">
+            <input type="text" id="feedNameInput" onkeypress="onFeedName(event, '$feedId')" value="$feedId">
         </section>
     </main>
     <script>$script</script>
