@@ -1,6 +1,4 @@
 <?php
-require_once "vendor/autoload.php";
-
 $_ENV["YOUTUBE_DEV_KEY"] = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/secret.json"))->devKey;
 
 class abutube
@@ -71,24 +69,46 @@ class abutube
             . "?key=" .  $_ENV["YOUTUBE_DEV_KEY"]
             . $parse;
 
-        // htmlentities($encode);
-        // urlencode($encode);
-
         return json_decode(
             file_get_contents(
                 $encode
             )
         );
     }
+}
 
-    function escapefile_url($url)
-    {
-        $parts = parse_url($url);
-        $path_parts = array_map('rawurldecode', explode('/', $parts['path']));
+class abutubeRender
+{
+    function itemData($data) { return array_merge([
+            "type" => "channel", // channel | video | playlist
+            "id" => "",
+            "title" => "",
+            "thumbnail" => "",
+            "desc" => "",
+            "link" => ""
+        ],
+        $data
+    );}
 
-        return
-            $parts['scheme'] . '://' .
-            $parts['host'] .
-            implode('/', array_map('rawurlencode', $path_parts));
+    function itemRender($data) {
+        $render = "";
+        for ($data as $item) {
+            
+            // Data from item
+            $type = $item["type"];
+            $id = $item["id"];
+            $title = $item["title"];
+            $thumbnail = $item["thumbnail"];
+            $desc = $item["desc"];
+            $link = $item["link"];
+
+            // Render item
+            $render .= <<<HTML
+                <div>
+                    
+                </div>
+            HTML;
+        }
     }
 }
+
