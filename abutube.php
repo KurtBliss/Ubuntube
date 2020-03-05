@@ -79,21 +79,38 @@ class abutube
 
 class abutubeRender
 {
-    function itemData($data) { return array_merge([
-            "type" => "channel", // channel | video | playlist
-            "id" => "",
-            "title" => "",
-            "thumbnail" => "",
-            "desc" => "",
-            "link" => ""
-        ],
-        $data
-    );}
+    function itemData($data = [])
+    {
+        return array_merge(
+            [
+                "type" => "channel", // channel | video | playlist
+                "id" => "",
+                "title" => "",
+                "thumbnail" => "",
+                "desc" => "",
+                "link" => ""
+            ],
+            $data
+        );
+    }
 
-    function itemRender($data) {
+    function itemDataParams($type, $id, $title, $thumbnail, $desc, $link)
+    {
+        return [
+            "type" => $type, // channel | video | playlist
+            "id" => $id,
+            "title" => $title,
+            "thumbnail" => $thumbnail,
+            "desc" => $desc,
+            "link" => $link
+        ];
+    }
+
+    function itemRender($data = [], $layout = "list")
+    {
         $render = "";
-        for ($data as $item) {
-            
+        foreach ($data as $item) {
+
             // Data from item
             $type = $item["type"];
             $id = $item["id"];
@@ -103,12 +120,76 @@ class abutubeRender
             $link = $item["link"];
 
             // Render item
-            $render .= <<<HTML
-                <div>
-                    
-                </div>
-            HTML;
+            switch ($layout) {
+                case "list":
+                default:
+                    $render .= <<<HTML
+                        <div>
+                            <img src=$thumbnail>
+                            <p><a href=$link>$title</a></p>
+                            <small>$type</small>
+                            <p>$desc</p>
+                        </div>
+                    HTML;
+                    break;
+            }
+        }
+    }
+
+    function parse($response, $settings = ["type" => "auto", "getContent" => "true", "isGroup" => "true"])
+    // $type = "auto", $getItemContent = "true")
+    {
+        $parse = [];
+        if ($settings["type"] === "auto") {
+            switch ($response->kind) {
+                case "youtube#channelListResponse":
+                    if ($settings["getContent"]) {
+                        foreach ($response->items as $item) {
+                            // Get channel content
+                            $parse[] = abutubeRender::parse(abutube::playlist_items($item->contentDetails->relatedPlaylists->uploads));
+                        }
+                        return $parse;
+                    } else {
+                        // Get channel information
+                        $parse[] = abutubeRender::parse($item);
+                    }
+                    break;
+                case "youtube#channel":
+                    $parse[] = abutubeRender::itemDataParams(
+                        $item->kind,
+                        $item->id,
+                        $item->snippet->title,
+                        $item->snippet->thumbnails->default->url,
+                        $item->snippet->description,
+                        "/channel/$item->id"
+                    );
+                    break;
+                case "youtube#channelSection":
+
+                    break;
+                case "youtube#playlist":
+                    if ($settings["getContent"]) {
+                    } else {
+                        $parse[] = abutubeRender::itemDataParams(
+                            $item->kind,
+                            $item->id,
+                            $item->snippet->title,
+                            $item->snippet->thumbnails->default->url,
+                            $item->snippet->description,
+                            "/playlist?list=$item->id"
+                        );
+                    }
+                    break;
+                case "youtube#playlistItem":
+                    $parse[] = [];
+                    break;
+                default:
+                    echo "Missing item kind " . $response->kind;
+            }
+        }
+
+        switch ($settings->type) {
+            default:
         }
     }
 }
-
