@@ -18,6 +18,12 @@ $router->map("GET", "/watch", function () {
     include "views/youtube/watch.php";
 });
 
+$router->map("GET", "/playlist", function () {
+    global $title, $website_name;
+    $title = "Playlist - $website_name";
+    include "views/youtube/playlist.php";
+});
+
 $router->map('GET', '/results', function () {
     global $title, $website_name;
     $title = "Results - $website_name";

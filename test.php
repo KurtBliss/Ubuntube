@@ -1,7 +1,12 @@
 <?php
 
-$test = ["one", "two"];
+include "abutube.php";
 
-$test[] = "three";
-
-print_r($test);
+print_r(
+    abutubeRender::parse(
+        abutube::channel_data(
+            $_GET["d"]
+        ),
+        ["getContent" => "true"]
+    )
+);

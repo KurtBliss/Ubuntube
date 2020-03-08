@@ -28,7 +28,7 @@ class abutube
         ]);
     }
 
-    function playlist_items($id, $max = 25)
+    function playlist_items($id, $max = 50)
     {
         return abutube::youtube("playlistItems", [
             "playlistId" => $id,
@@ -134,62 +134,93 @@ class abutubeRender
                     break;
             }
         }
+        return $render;
     }
 
-    function parse($response, $settings = ["type" => "auto", "getContent" => "true", "isGroup" => "true"])
+    function parse($response, $settings = ["type" => "auto", "getContent" => "true"])
     // $type = "auto", $getItemContent = "true")
     {
+        $set = array_merge(["type" => "auto", "getContent" => "true"], $settings);
+
         $parse = [];
-        if ($settings["type"] === "auto") {
+        if ($set["type"] === "auto") {
+            // print_r([$response->kind]);
             switch ($response->kind) {
                 case "youtube#channelListResponse":
-                    if ($settings["getContent"]) {
+                    if ($set["getContent"] === "true") {
                         foreach ($response->items as $item) {
                             // Get channel content
-                            $parse[] = abutubeRender::parse(abutube::playlist_items($item->contentDetails->relatedPlaylists->uploads));
+                            // print_r(["get content"]);
+                            $parse = array_merge(
+                                $parse,
+                                abutubeRender::parse(abutube::playlist_items($item->contentDetails->relatedPlaylists->uploads))
+                            );
+
+
+                            // $parse[] = abutubeRender::parse(abutube::playlist_items($item->contentDetails->relatedPlaylists->uploads));
                         }
                         return $parse;
                     } else {
                         // Get channel information
-                        $parse[] = abutubeRender::parse($item);
+                        // print_r(["get channel information", $response]);
+                        $parse = array_merge($parse, abutubeRender::parse($response->items[0]));
                     }
                     break;
                 case "youtube#channel":
-                    $parse[] = abutubeRender::itemDataParams(
-                        $item->kind,
-                        $item->id,
-                        $item->snippet->title,
-                        $item->snippet->thumbnails->default->url,
-                        $item->snippet->description,
-                        "/channel/$item->id"
-                    );
+                    // print_r(["youtube channel", $response]);
+                    $parse = array_merge($parse, abutubeRender::itemDataParams(
+                        $response->kind,
+                        $response->id,
+                        $response->snippet->title,
+                        $response->snippet->thumbnails->default->url,
+                        $response->snippet->description,
+                        "/channel/$response->id"
+                    ));
                     break;
                 case "youtube#channelSection":
 
                     break;
                 case "youtube#playlist":
-                    if ($settings["getContent"]) {
+                    if ($set["getContent"]) {
+                        foreach ($response->items as $item) {
+                            $parse = array_merge($parse, abutubeRender::parse(abutube::playlist_items($item->id)));
+                        }
                     } else {
-                        $parse[] = abutubeRender::itemDataParams(
+                        $parse = array_merge($parse, abutubeRender::itemDataParams(
                             $item->kind,
                             $item->id,
                             $item->snippet->title,
                             $item->snippet->thumbnails->default->url,
                             $item->snippet->description,
                             "/playlist?list=$item->id"
-                        );
+                        ));
+                    }
+                    break;
+                case "youtube#playlistItemListResponse":
+                    foreach ($response->items as $item) {
+                        $parse[] = abutubeRender::parse($item);
                     }
                     break;
                 case "youtube#playlistItem":
-                    $parse[] = [];
+                    $parse = array_merge($parse, abutubeRender::itemDataParams(
+                        $response->kind,
+                        $response->id, //video-id?
+                        $response->snippet->title,
+                        $response->snippet->thumbnails->default->url,
+                        $response->snippet->description,
+                        "/watch?v=$response->id"
+                    ));
                     break;
                 default:
-                    echo "Missing item kind " . $response->kind;
+                    echo "Missing item kind " . $response->kind . " ";
+                    // print_r($response);
             }
         }
 
-        switch ($settings->type) {
+        switch ($set->type) {
             default:
         }
+
+        return $parse;
     }
 }
