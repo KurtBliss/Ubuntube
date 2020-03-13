@@ -9,40 +9,17 @@ HTML;
 
 $feedSections = "";
 
-if (isset($JSON->section))
-    foreach ($JSON->section as $section) {
-        if ($section->type == "singlePlaylist") {
 
-            // Playlist Data
-            $title = abutube::playlist_data($section->playlistId)->items[0]->snippet->title;
+foreach ($JSON->section as $section) {
+    $feedSections .= abutubeRender::itemRender(abutubeRender::parse($section, ["type" => "feed"]), "horizontal");
+}
 
-            // Playlist Items
-            $uploads = abutube::playlist_items($section->playlistId)->items;
+// $data = abutubeRender::parse($JSON->section, ["type" => "feed"]);
 
-            $uploadsHTML = "";
-
-            foreach ($uploads as $upload) {
-                $uploadTitle = $upload->snippet->title;
-
-                $uploadId = $upload->contentDetails->videoId;
-
-                $uploadsHTML .= <<<HTML
-                    <div>
-                        <p><a href="/watch?v=$uploadId">$uploadTitle</a></p>
-                    </div>
-                HTML;
-            }
-
-            // Render
-            $feedSections .= <<<HTML
-                <h2>$title</h2>
-                <hr>
-                <div>
-                $uploadsHTML
-                </div>
-            HTML;
-        }
-    }
+// foreach ($data as $section) {
+// $feedSections .= abutubeRender::itemRender($section, "horizontal");
+// }
+// print_r(abutubeRender::parse($JSON, ["type" => "feed"]));
 
 echo <<<HTML
     $feedTitle

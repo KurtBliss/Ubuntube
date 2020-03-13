@@ -2,7 +2,13 @@
 
 $playlistId = $_GET["list"];
 
-$render = abutubeRender::itemRender(abutubeRender::parse(abutube::playlist_items($playlistId)));
+$render = abutubeRender::itemRender(
+    abutubeRender::parse(
+        abutube::playlist_items(
+            $playlistId
+        )
+    )
+);
 
 global $content;
 $content = <<<HTML

@@ -109,31 +109,56 @@ class abutubeRender
     function itemRender($data = [], $layout = "list")
     {
         $render = "";
-        foreach ($data as $item) {
 
-            // Data from item
-            $type = $item["type"];
-            $id = $item["id"];
-            $title = $item["title"];
-            $thumbnail = $item["thumbnail"];
-            $desc = $item["desc"];
-            $link = $item["link"];
+        switch ($layout) {
+            case "horizontal":
+                foreach ($data as $item) {
+                    // Data from item
+                    $type = $item["type"];
+                    $id = $item["id"];
+                    $title = $item["title"];
+                    $thumbnail = $item["thumbnail"];
+                    $desc = $item["desc"];
+                    $link = $item["link"];
 
-            // Render item
-            switch ($layout) {
-                case "list":
-                default:
+                    $render .= <<<HTML
+                            <div class="list-item">
+                                <img src=$thumbnail>
+                                <p><a href=$link>$title</a><small>$type</small></p>
+                            </div>
+                        HTML;
+                }
+                $render = <<<HTML
+                    <div class="list-horizontal">
+                        <div class="list-horizontal-left" onclick="slideBack()"> < </div>
+                        $render
+                        <div class="list-horizontal-right" onClick="slide()"> > </div>
+                    </div>
+                HTML;
+                break;
+
+            case "list":
+            default:
+                foreach ($data as $item) {
+                    // Data from item
+                    $type = $item["type"];
+                    $id = $item["id"];
+                    $title = $item["title"];
+                    $thumbnail = $item["thumbnail"];
+                    $desc = $item["desc"];
+                    $link = $item["link"];
+
                     $render .= <<<HTML
                         <div>
                             <img src=$thumbnail>
-                            <p><a href=$link>$title</a></p>
-                            <small>$type</small>
-                            <p>$desc</p>
+                            <p><a href=$link>$title</a><small>$type</small></p>
                         </div>
                     HTML;
-                    break;
-            }
+                }
+                break;
         }
+
+
         return $render;
     }
 
@@ -197,6 +222,7 @@ class abutubeRender
                     }
                     break;
                 case "youtube#playlistItemListResponse":
+                case "youtube#searchListResponse":
                     foreach ($response->items as $item) {
                         $parse[] = abutubeRender::parse($item);
                     }
@@ -211,14 +237,57 @@ class abutubeRender
                         "/watch?v=$response->id"
                     ));
                     break;
+                case "youtube#searchResult":
+                    // print_r($response);
+                    switch ($response->id->kind) {
+                        case "youtube#video":
+                            $link = "/watch?v=" . $response->id->videoId;
+                            $parse = abutubeRender::itemDataParams(
+                                $response->id->kind,
+                                $response->id->videoId,
+                                $response->snippet->title,
+                                $response->snippet->thumbnails->default->url,
+                                $response->snippet->description,
+                                $link
+                            );
+                            break;
+                        case "youtube#channel":
+                            $link = "/channel/" . $response->id->channelId;
+                            $parse = abutubeRender::itemDataParams(
+                                $response->id->kind,
+                                $response->id->channelId,
+                                $response->snippet->title,
+                                $response->snippet->thumbnails->default->url,
+                                $response->snippet->description,
+                                $link
+                            );
+                            break;
+                    }
+
+
+                    break;
                 default:
                     echo "Missing item kind " . $response->kind . " ";
                     // print_r($response);
             }
-        }
-
-        switch ($set->type) {
-            default:
+        } else {
+            switch ($set["type"]) {
+                case "feed":
+                    $parse = [];
+                    // foreach ($response->section as $section) {
+                    switch ($response->type) {
+                        case "singlePlaylist":
+                            $parse = array_merge($parse, abutubeRender::parse(abutube::playlist_items($response->playlistId)));
+                            break;
+                        default:
+                            // print_r($response);
+                            // print_r(["Missing feed section type $response->type"]);
+                    }
+                    // abutubeRender::parse(abutube::)
+                    // }
+                    break;
+                default:
+            }
         }
 
         return $parse;
