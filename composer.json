@@ -2,7 +2,6 @@
   "name": "abutubePHP",
   "description": "custom ",
   "require": {
-    "altorouter/altorouter": "1.1.0",
-    "google/apiclient": "~2.0"
+    "altorouter/altorouter": "1.1.0"
   }
 }
