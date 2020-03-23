@@ -1,5 +1,8 @@
 <?php
-$_ENV["YOUTUBE_DEV_KEY"] = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/secret.json"))->devKey;
+
+if (!isset($_ENV["YOUTUBE_DEV_KEY"])) {
+    $_ENV["YOUTUBE_DEV_KEY"] = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/secret.json"))->devKey;
+}
 
 class abutube
 {
