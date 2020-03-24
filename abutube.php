@@ -127,7 +127,7 @@ class abutubeRender
                     $render .= <<<HTML
                             <div class="list-item">
                                 <img src=$thumbnail>
-                                <p><a href=$link>$title</a><small>$type</small></p>
+                                <p><a href=$link>$title</a></p>
                             </div>
                         HTML;
                 }
@@ -154,7 +154,7 @@ class abutubeRender
                     $render .= <<<HTML
                         <div>
                             <img src=$thumbnail>
-                            <p><a href=$link>$title</a><small>$type</small></p>
+                            <p><a href=$link>$title</a></p>
                         </div>
                     HTML;
                 }

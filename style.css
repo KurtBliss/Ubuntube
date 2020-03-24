@@ -56,7 +56,8 @@ a {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
   padding: 0;
-  margin: 0;
+  margin: 0px;
+  margin-bottom: 30px;
 }
 
 .list-item {
@@ -90,6 +91,28 @@ a {
 .list-horizontal-right {
   /* Right button */
   right: 0px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  /* width */
+  width: 10px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  /* Track */
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  /* Handle */
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  /* Handle on hover */
+  background: #555;
 }
 
 /* 
