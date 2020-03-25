@@ -6,16 +6,18 @@ $header = <<<HTML
 <header>
   <!--   Logo   -->
   <label>
+    <a id="nav-toggle" onclick="menuButton()">&#9776;</a>
     <a href="/" class="header-title">
       BLISSFULTUBE
     </a>
   </label>
   
-  <!--  Navigation  -->
-  <nav class="header-nav">
-    <!-- <a href="/">home</a> | <a>about</a> | <a>contact</a> |  -->
+  <!-- Search -->
+  <!-- <div class="searchWrapper"> -->
     <input id="searchInput" class="searchInput" type="text" placeholder="Search.." onkeypress="search(event)">
-  </nav>
-  <hr> 
+  <!-- </div> -->
+
+
+
 </header>
 HTML;
