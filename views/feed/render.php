@@ -9,12 +9,16 @@ HTML;
 
 $feedSections = "";
 
-
-foreach ($JSON->section as $section) {
-    $item = abutubeRender::parse($section, ["type" => "feed"]);
-    $feedSections .= abutubeRender::itemRender($item, "horizontal");
+if (isset($JSON->section)) {
+    foreach ($JSON->section as $section) {
+        $item = abutubeRender::parse($section, ["type" => "feed"]);
+        $feedSections .= abutubeRender::itemRender($item, "horizontal");
+    }
+} else {
+    $feedSections = <<<HTML
+        <p>Feed is empty</p>
+    HTML;
 }
-
 echo <<<HTML
     $feedTitle
     $feedSections
