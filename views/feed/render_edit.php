@@ -13,8 +13,7 @@ print_r($JSON);
 $id = $JSON->id;
 $feedHead = <<<HTML
     <h1>$JSON->name</h1>
-    <p><a href="/edit/$id">edit</a></p>
-    <p><a href="/edit/remove/$id">delete</a></p>
+    <p><a href="/feed/$id">view</a></p>
 HTML;
 
 /*
@@ -26,8 +25,9 @@ $feedSections = "";
 
 if (isset($JSON->section)) {
     foreach ($JSON->section as $section) {
-        $item = abutubeRender::parse($section, ["type" => "feed"]);
-        $feedSections .= abutubeRender::itemRender($item, "horizontal");
+        $feedSections .= <<<HTML
+            <p>section</p>
+        HTML;
     }
 } else {
     $feedSections = <<<HTML

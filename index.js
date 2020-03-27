@@ -60,7 +60,7 @@ function onFeedNew(event) {
   if (event.key === "Enter") {
     feedsObj = feeds();
     id = document.getElementById("newFeedInput").value;
-    feedsObj[id] = { name: id };
+    feedsObj[id] = { id: id, name: id };
     feeds(feedsObj);
   } else {
     return false;
@@ -106,7 +106,7 @@ function feed_add_single_playlist(getFeed, playlistId) {
     Render Feeds
 
 */
-function renderFeed(data, feedId) {
+function renderFeed(data, feedId, edit = false) {
   document.getElementById("feed-container").innerHTML = "<p>rendering...</p>";
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -114,8 +114,13 @@ function renderFeed(data, feedId) {
       document.getElementById("feed-container").innerHTML = this.responseText;
     }
   };
-  xhttp.open("POST", "/views/feed/render.php", true);
+  if (edit) {
+    xhttp.open("POST", "/views/feed/render_edit.php", true);
+  } else {
+    xhttp.open("POST", "/views/feed/render.php", true);
+  }
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  console.log(data);
   xhttp.send("data=" + JSON.stringify(data[feedId]));
 }
 
