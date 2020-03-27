@@ -11,15 +11,9 @@ $feedSections = "";
 
 
 foreach ($JSON->section as $section) {
-    $feedSections .= abutubeRender::itemRender(abutubeRender::parse($section, ["type" => "feed"]), "horizontal");
+    $item = abutubeRender::parse($section, ["type" => "feed"]);
+    $feedSections .= abutubeRender::itemRender($item, "horizontal");
 }
-
-// $data = abutubeRender::parse($JSON->section, ["type" => "feed"]);
-
-// foreach ($data as $section) {
-// $feedSections .= abutubeRender::itemRender($section, "horizontal");
-// }
-// print_r(abutubeRender::parse($JSON, ["type" => "feed"]));
 
 echo <<<HTML
     $feedTitle

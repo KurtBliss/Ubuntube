@@ -172,13 +172,11 @@ class abutubeRender
 
         $parse = [];
         if ($set["type"] === "auto") {
-            // print_r([$response->kind]);
             switch ($response->kind) {
                 case "youtube#channelListResponse":
                     if ($set["getContent"] === "true") {
                         foreach ($response->items as $item) {
                             // Get channel content
-                            // print_r(["get content"]);
                             $parse = array_merge(
                                 $parse,
                                 abutubeRender::parse(abutube::playlist_items($item->contentDetails->relatedPlaylists->uploads))
@@ -190,12 +188,10 @@ class abutubeRender
                         return $parse;
                     } else {
                         // Get channel information
-                        // print_r(["get channel information", $response]);
                         $parse = array_merge($parse, abutubeRender::parse($response->items[0]));
                     }
                     break;
                 case "youtube#channel":
-                    // print_r(["youtube channel", $response]);
                     $parse = array_merge($parse, abutubeRender::itemDataParams(
                         $response->kind,
                         $response->id,
@@ -233,15 +229,14 @@ class abutubeRender
                 case "youtube#playlistItem":
                     $parse = array_merge($parse, abutubeRender::itemDataParams(
                         $response->kind,
-                        $response->id, //video-id?
+                        $response->snippet->resourceId->videoId, //video-id?
                         $response->snippet->title,
                         $response->snippet->thumbnails->default->url,
                         $response->snippet->description,
-                        "/watch?v=$response->id"
+                        "/watch?v=" . $response->snippet->resourceId->videoId
                     ));
                     break;
                 case "youtube#searchResult":
-                    // print_r($response);
                     switch ($response->id->kind) {
                         case "youtube#video":
                             $link = "/watch?v=" . $response->id->videoId;
@@ -271,7 +266,6 @@ class abutubeRender
                     break;
                 default:
                     echo "Missing item kind " . $response->kind . " ";
-                    // print_r($response);
             }
         } else {
             switch ($set["type"]) {
@@ -283,8 +277,7 @@ class abutubeRender
                             $parse = array_merge($parse, abutubeRender::parse(abutube::playlist_items($response->playlistId)));
                             break;
                         default:
-                            // print_r($response);
-                            // print_r(["Missing feed section type $response->type"]);
+                            print_r(["Missing feed section type $response->type"]);
                     }
                     // abutubeRender::parse(abutube::)
                     // }
