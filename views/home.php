@@ -26,6 +26,10 @@ $content = <<<HTML
             <h1 class="sectionTitle">Make new feed:</h1>
             <input type="text" id="newFeedInput" onkeypress="onFeedNew(event)">
         </section>
+        <section>
+            <h1 class="sectionTitle">Welcome!</h1>
+            <p>Check out our <a href="https://github.com/KurtBliss/Ubuntube">github page</a></p>
+        </section>
         <script>$script</script>
     </main>
 HTML;
