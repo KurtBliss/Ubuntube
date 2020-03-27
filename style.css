@@ -122,7 +122,7 @@ a {
     Header
 
 */
-header {
+.headerTopBar {
   display: grid;
   grid-template-columns: 175px auto;
   column-gap: 20px;
@@ -188,13 +188,14 @@ aside a {
 }
 
 aside {
-  background-color: white;
+  display: none;
+  background-color: #1f1f1f;
   height: 85%;
   width: 160px; /* match, margin-left of content */
   top: 32px;
   left: 0px;
   z-index: 1;
-  padding: 10px;
+  padding: 0px;
   overflow-x: hidden; /* Disable horizontal scroll */
   position: fixed;
 }

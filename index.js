@@ -16,6 +16,28 @@ function search(event) {
 
 /*
 
+    Menu
+
+*/
+var menu_visible = false;
+
+function menuButton() {
+  var element_main = document.getElementsByTagName("main")[0];
+  var element_menu = document.getElementById("asideMenu");
+
+  if (menu_visible) {
+    element_main.style = "margin-left: 0";
+    element_menu.style = "display:none";
+    menu_visible = false;
+  } else {
+    element_main.style = "margin-left: 180px";
+    element_menu.style = "display:block";
+    menu_visible = true;
+  }
+}
+
+/*
+
     FEEDS
 
 */
