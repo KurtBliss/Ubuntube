@@ -11,7 +11,7 @@ $script = <<<JS
     
     for (const feed in feedsObj) {
 
-        appendContainer('<p><a href=feed/' + feed + '>' + feedsObj[feed]["name"] + '</a></p>', "feeds-list");
+        appendContainer('<p><a target=_self href=feed/' + feed + '>' + feedsObj[feed]["name"] + '</a></p>', "feeds-list");
 
         console.log(feedsObj[feed]);
     }    
