@@ -14,7 +14,6 @@ $id = $JSON->id;
 $feedHead = <<<HTML
     <h1>$JSON->name</h1>
     <p><a href="/edit/$id">edit</a></p>
-    <p><a href="/edit/remove/$id">delete</a></p>
 HTML;
 
 /*
