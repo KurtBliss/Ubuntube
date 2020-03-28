@@ -23,7 +23,7 @@ $content = <<<HTML
             <h1 class="sectionTitle">Your Feeds:</h1>
             <div id="feeds-list"></div>
 
-            <h1 class="sectionTitle">Make new feed:</h1>
+            <h1 class="sectionTitle">Make New Feed:</h1>
             <input type="text" id="newFeedInput" onkeypress="onFeedNew(event)">
         </section>
         <section class="home-welcome">
