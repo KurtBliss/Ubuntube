@@ -223,3 +223,19 @@ footer {
   max-width: 960px;
   height: 5.5rem; /* Footer height */
 }
+
+/*
+
+    Mobile
+
+*/
+
+@media only screen and (max-width: 640px) {
+  main {
+    margin-left: 0;
+  }
+
+  #asideMenu {
+    width: 100%;
+  }
+}
