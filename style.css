@@ -34,6 +34,14 @@ a {
   color: white;
 }
 
+.home-welcome {
+  text-align: center;
+}
+
+.img-round {
+  border-radius: 50%;
+}  
+
 /* Results */
 .result-item {
   margin: 10px;
@@ -220,7 +228,6 @@ footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  max-width: 960px;
   height: 5.5rem; /* Footer height */
 }
 

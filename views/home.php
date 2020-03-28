@@ -20,14 +20,15 @@ JS;
 $content = <<<HTML
     <main>
         <section>
-            <h1 class="sectionTitle">Your feeds:</h1>
+            <h1 class="sectionTitle">Your Feeds:</h1>
             <div id="feeds-list"></div>
 
             <h1 class="sectionTitle">Make new feed:</h1>
             <input type="text" id="newFeedInput" onkeypress="onFeedNew(event)">
         </section>
-        <section>
+        <section class="home-welcome">
             <h1 class="sectionTitle">Welcome!</h1>
+            <img class="img-round" src="https://picsum.photos/100">
             <p>Check out our <a href="https://github.com/KurtBliss/Ubuntube">github page</a></p>
         </section>
         <script>$script</script>
