@@ -155,7 +155,9 @@ function href4ios(){
   {
       a[i].onclick=function()
       {
-          if ((this.getAttribute("href").charAt(0)) == "/") {
+          var href = this.getAttribute("href")
+          if ((href.charAt(0)) == "/") {
+            console.log("YES");
               window.location=this.getAttribute("href");
               return false
           }
