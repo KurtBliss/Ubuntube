@@ -21,22 +21,7 @@ echo <<<HTML
         $menu
         $content
         $footer4
-        <script>href4ios();
-        
-        var a=document.getElementsByTagName("a");
-  for(var i=0;i<a.length;i++)
-  {
-      a[i].onclick=function()
-      {
-          // var href = this.getAttribute("href")
-          // if ((href.charAt(0)) == "/") 
-          // {
-          //   console.log("YES");
-              window.location=this.getAttribute("href");
-              return false
-          // }
-      }
-  }</script>
+        <script>this.href4ios();</script>
     </body>
 </html>
 HTML;
