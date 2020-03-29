@@ -19,7 +19,11 @@ $content = <<<HTML
     <main>
         <section>
             <p class="section-title">$videoTitle</p>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/$videoId" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            <div class="youtube-video-container">
+                <iframe class="youtube-video-player" src="https://www.youtube.com/embed/$videoId" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
             <div>
                 
                 <p class="watch-channel-title">
