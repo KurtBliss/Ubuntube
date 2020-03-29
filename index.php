@@ -13,6 +13,7 @@ echo <<<HTML
         <meta name="apple-mobile-web-app-capable" content="yes">
         <title>$title</title>
         <link rel="stylesheet" type="text/css" href="/style.css">
+        <link rel="apple-touch-icon" href="/custom_icon.png">
         <script src="/index.js"></script>
     </head>
     <body>
@@ -20,20 +21,7 @@ echo <<<HTML
         $menu
         $content
         $footer
-        <script>
-            var a=document.getElementsByTagName("a");
-            for(var i=0;i<a.length;i++)
-            {
-                // a[i].removeAttribute("href")
-                // a[i].onclick=function(e)
-                a[i].onclick=function()
-                {
-                // e.preventDefault();
-                    window.location=this.getAttribute("href");
-                    return false
-                }
-            }
-        </script>
+        <script>href4ios();</script>
     </body>
 </html>
 HTML;

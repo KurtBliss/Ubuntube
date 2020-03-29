@@ -112,6 +112,7 @@ function renderFeed(data, feedId, edit = false) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       document.getElementById("feed-container").innerHTML = this.responseText;
+      href4ios()
     }
   };
   if (edit) {
@@ -148,24 +149,16 @@ function loadObject(name) {
 
 */
 
-// var a=document.getElementsByTagName("a");
-// for(var i=0;i<a.length;i++) {
-//     if(!a[i].onclick && a[i].getAttribute("target") != "_blank") {
-//         a[i].onclick=function() {
-//                 window.location=this.getAttribute("href");
-//                 return false; 
-//         }
-//     }
-// }
-
-var a=document.getElementsByTagName("a");
-            for(var i=0;i<a.length;i++)
-            {
-                a[i].removeAttribute("href")
-                a[i].onclick=function(e)
-                {
-                e.preventDefault();
-                    window.location=this.getAttribute("href");
-                    return false
-                }
-            }
+function href4ios(){
+  var a=document.getElementsByTagName("a");
+  for(var i=0;i<a.length;i++)
+  {
+      a[i].onclick=function()
+      {
+          if ((this.getAttribute("href").charAt(0)) == "/") {
+              window.location=this.getAttribute("href");
+              return false
+          }
+      }
+  }
+}

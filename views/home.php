@@ -28,7 +28,7 @@ $content = <<<HTML
         </section>
         <section class="home-welcome">
             <h1 class="sectionTitle">Welcome!</h1>
-            <img class="img-round" src="https://picsum.photos/100">
+            <img class="img-round" style="width:150px; height:150px" src="/logo.png">
             <p>Check out our <a href="https://github.com/KurtBliss/Ubuntube">github page</a></p>
         </section>
         <script>$script</script>
