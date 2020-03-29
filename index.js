@@ -157,7 +157,7 @@ function href4ios(){
       {
           var href = this.getAttribute("href")
           console.log(href);
-          if (href.includes("http")) 
+          if (!href.includes("http")) 
           {
               window.location=this.getAttribute("href");
               return false
