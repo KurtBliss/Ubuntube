@@ -156,9 +156,9 @@ function href4ios(){
       a[i].onclick=function()
       {
           var href = this.getAttribute("href")
-          if ((href.charAt(0)) == "/") 
+          console.log(href);
+          if (href.includes("http")) 
           {
-            alert("interal link")
               window.location=this.getAttribute("href");
               return false
           }
