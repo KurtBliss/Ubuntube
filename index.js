@@ -153,14 +153,17 @@ function href4ios(){
   var a=document.getElementsByTagName("a");
   for(var i=0;i<a.length;i++)
   {
+      if(a[i].onclick==null)
       a[i].onclick=function()
       {
           var href = this.getAttribute("href")
-          console.log(href);
-          if (!href.includes("http")) 
-          {
-              window.location=this.getAttribute("href");
-              return false
+          if (href != null) {
+            console.log(href);
+            if (!href.includes("http")) 
+            {
+                window.location=this.getAttribute("href");
+                return false
+            }
           }
       }
   }

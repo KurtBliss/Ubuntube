@@ -245,4 +245,9 @@ footer {
   #asideMenu {
     width: 100%;
   }
+
+  .headerTopBar {
+    grid-template-columns: auto;
+  }
+
 }
