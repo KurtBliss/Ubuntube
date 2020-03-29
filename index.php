@@ -20,7 +20,7 @@ echo <<<HTML
         $header
         $menu
         $content
-        $footer4
+        $footer
         <script>this.href4ios();</script>
     </body>
 </html>
