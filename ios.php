@@ -12,7 +12,6 @@ echo <<<HTML
         <meta charset="utf-8">
         <meta name="viewport"; content="width=device-width, initial-scale=1.0, user-scalable=no"; />
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="viewport" content="width=device-width,initial-scale=1.01,minimal-ui">
 
     </head>
     <body>
