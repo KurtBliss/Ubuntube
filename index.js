@@ -158,6 +158,7 @@ function href4ios(){
           var href = this.getAttribute("href")
           if ((href.charAt(0)) == "/") 
           {
+            alert("interal link")
               window.location=this.getAttribute("href");
               return false
           }
