@@ -7,6 +7,6 @@
 */
 
 echo <<<HTML
-<iframe fullscreen src="/"></iframe>
+<iframe style="width:100%, height:100%" src="/"></iframe>
 <meta name="apple-mobile-web-app-capable" content="yes">
 HTML;
