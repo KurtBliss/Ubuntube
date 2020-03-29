@@ -13,7 +13,7 @@ echo <<<HTML
         <meta name="apple-mobile-web-app-capable" content="yes">
         <title>$title</title>
         <link rel="stylesheet" type="text/css" href="/style.css">
-        <link rel="apple-touch-icon" href="/custom_icon.png">
+        <link rel="apple-touch-icon" href="/logo.png">
         <script src="/index.js"></script>
     </head>
     <body>
