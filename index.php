@@ -24,9 +24,11 @@ echo <<<HTML
             var a=document.getElementsByTagName("a");
             for(var i=0;i<a.length;i++)
             {
-                a[i].onclick=function(e)
+                // a[i].removeAttribute("href")
+                // a[i].onclick=function(e)
+                a[i].onclick=function()
                 {
-                e.preventDefault();
+                // e.preventDefault();
                     window.location=this.getAttribute("href");
                     return false
                 }
