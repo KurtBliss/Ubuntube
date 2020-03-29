@@ -155,12 +155,13 @@ function href4ios(){
   {
       a[i].onclick=function()
       {
-          var href = this.getAttribute("href")
-          if ((href.charAt(0)) == "/") {
-            console.log("YES");
+          // var href = this.getAttribute("href")
+          // if ((href.charAt(0)) == "/") 
+          // {
+          //   console.log("YES");
               window.location=this.getAttribute("href");
               return false
-          }
+          // }
       }
   }
 }
