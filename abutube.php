@@ -124,9 +124,17 @@ class abutubeRender
                     $desc = $item["desc"];
                     $link = $item["link"];
 
+                    echo $type;
+
+                    if ($type == "youtube#channel") {
+                        $imgClass = "img-round";
+                    } else {
+                        $imgClass = "";
+                    }
+
                     $render .= <<<HTML
                             <div class="list-item">
-                                <img src=$thumbnail>
+                                <img class="$imgClass" src=$thumbnail>
                                 <p><a href=$link>$title</a></p>
                             </div>
                         HTML;
@@ -151,9 +159,17 @@ class abutubeRender
                     $desc = $item["desc"];
                     $link = $item["link"];
 
+                    echo $type;
+
+                    if ($type == "youtube#channel") {
+                        $imgClass = "img-round";
+                    } else {
+                        $imgClass = "";
+                    }
+
                     $render .= <<<HTML
                         <div>
-                            <img src=$thumbnail>
+                            <img class="$imgClass" src=$thumbnail>
                             <p><a href=$link>$title</a></p>
                         </div>
                     HTML;

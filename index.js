@@ -101,6 +101,12 @@ function feed_add_single_playlist(getFeed, playlistId) {
   feeds(feedObj);
 }
 
+function feedRemove(feed) {
+  var feedObj = feeds();
+  delete feedObj[feed];
+  feeds(feedObj);
+}
+
 /*
 
     Render Feeds
@@ -112,7 +118,7 @@ function renderFeed(data, feedId, edit = false) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       document.getElementById("feed-container").innerHTML = this.responseText;
-      href4ios()
+      href4ios();
     }
   };
   if (edit) {
@@ -142,30 +148,25 @@ function loadObject(name) {
   return JSON.parse(localStorage.getItem("obj_" + name));
 }
 
-
 /*
 
     Avoid links exiting ios fullscreen mode
 
 */
 
-function href4ios(){
-  var a=document.getElementsByTagName("a");
-  for(var i=0;i<a.length;i++)
-  {
-      if(a[i].onclick==null)
-      a[i].onclick=function()
-      {
-          var href = this.getAttribute("href")
-          if (href != null) {
-            console.log(href);
-            if (!href.includes("http")) 
-            {
-                window.location=this.getAttribute("href");
-                return false
-            }
+function href4ios() {
+  var a = document.getElementsByTagName("a");
+  for (var i = 0; i < a.length; i++) {
+    if (a[i].onclick == null)
+      a[i].onclick = function() {
+        var href = this.getAttribute("href");
+        if (href != null) {
+          console.log(href);
+          if (!href.includes("http")) {
+            window.location = this.getAttribute("href");
+            return false;
           }
-      }
+        }
+      };
   }
 }
-
