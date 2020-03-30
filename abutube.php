@@ -70,7 +70,7 @@ class abutube
             "https://www.googleapis.com/youtube/v3/"
             . $resource
             . "?key=" .  $_ENV["YOUTUBE_DEV_KEY"]
-            . $parse;
+            . str_replace(" ", "%20", $parse);
 
         return json_decode(
             file_get_contents(
@@ -124,7 +124,7 @@ class abutubeRender
                     $desc = $item["desc"];
                     $link = $item["link"];
 
-                    echo $type;
+                    // echo $type;
 
                     if ($type == "youtube#channel") {
                         $imgClass = "img-round";
@@ -159,7 +159,7 @@ class abutubeRender
                     $desc = $item["desc"];
                     $link = $item["link"];
 
-                    echo $type;
+                    // echo $type;
 
                     if ($type == "youtube#channel") {
                         $imgClass = "img-round";
