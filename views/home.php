@@ -11,7 +11,7 @@ $script = <<<JS
     
     for (const feed in feedsObj) {
 
-        appendContainer('<p><a target=_self href=feed/' + feed + '>' + feedsObj[feed]["name"] + '</a></p>', "feeds-list");
+        appendContainer('<a class="feed-home" target=_self href=feed/' + feed + '>' + feedsObj[feed]["name"] + '</a>', "feeds-list");
 
         console.log(feedsObj[feed]);
     }    
@@ -19,18 +19,20 @@ JS;
 
 $content = <<<HTML
     <main>
+        <h1 class="feed-home-section">Your Feeds:</h1>
         <section>
-            <h1 class="sectionTitle">Your Feeds:</h1>
             <div id="feeds-list"></div>
+        </section>
 
-            <h1 class="sectionTitle">Make New Feed:</h1>
+        <h1 class="feed-home-section">Make New Feed:</h1>
+        <section>
             <input type="text" id="newFeedInput" onkeypress="onFeedNew(event)">
         </section>
-        <section class="home-welcome">
+        <div class="home-welcome">
             <h1 class="sectionTitle">Welcome!</h1>
             <img class="img-round" style="width:150px; height:150px" src="/logo.png">
             <p>Check out our <a href="https://github.com/KurtBliss/Ubuntube">github page</a></p>
-        </section>
+        </div>
         <script>$script</script>
     </main>
 HTML;
