@@ -208,8 +208,20 @@ Body Home
   border-radius: 15px;
 }
 
+.searchWrapper {
+  display: grid;
+  grid-template-columns: auto 32px;
+}
+
+.searchWrapper a {
+  margin-left: 5px;
+  font-size: 20px;
+  display: inline;
+  cursor: pointer;
+}
+
 .searchInput {
-  display: block;
+  display: inline-block;
   transition: 0.2s;
   font-size: 1rem;
   color: white;

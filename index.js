@@ -5,10 +5,14 @@
 */
 var feedsObj = feeds();
 
-function search(event) {
+function executeSearch() {
+  window.location.href =
+    "/results?q=" + document.getElementById("searchInput").value;
+}
+
+function onSearch(event) {
   if (event.key === "Enter") {
-    window.location.href =
-      "/results?q=" + document.getElementById("searchInput").value;
+    executeSearch();
   } else {
     return false;
   }
@@ -59,13 +63,17 @@ function feeds(set) {
 */
 function onFeedNew(event) {
   if (event.key === "Enter") {
-    feedsObj = feeds();
-    id = document.getElementById("newFeedInput").value;
-    feedsObj[id] = { id: id, name: id, sections: [] };
-    feeds(feedsObj);
+    NewFeedButton();
   } else {
     return false;
   }
+}
+
+function NewFeedButton() {
+  feedsObj = feeds();
+  id = document.getElementById("newFeedInput").value;
+  feedsObj[id] = { id: id, name: id, sections: [] };
+  feeds(feedsObj);
 }
 
 function onFeedName(event, feedId) {

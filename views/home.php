@@ -28,7 +28,7 @@ $content = <<<HTML
 
         <h1 class="feed-home-section">Make New Feed:</h1>
         <section>
-            <input type="text" id="newFeedInput" onkeypress="onFeedNew(event)">
+            <input type="text" id="newFeedInput" onkeypress="onFeedNew(event)"><button onclick="NewFeedButton()">Create</button>
         </section>
         <div class="home-welcome">
             <h1 class="sectionTitle">Welcome!</h1>

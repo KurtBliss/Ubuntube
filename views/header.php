@@ -14,9 +14,10 @@ $header = <<<HTML
     </label>
     
     <!-- Search -->
-    <!-- <div class="searchWrapper"> -->
-      <input id="searchInput" class="searchInput" type="text" placeholder="Search.." onkeypress="search(event)">
-    <!-- </div> -->
+    <div class="searchWrapper">
+      <input id="searchInput" class="searchInput" type="text" placeholder="Search.." onkeypress="onSearch(event)">
+      <a onclick="executeSearch()">&#128269;</a>
+    </div>
   </div>
 </header>
 HTML;
