@@ -2,8 +2,6 @@
 $feedId = urldecode($id);
 global $content;
 
-print($feedId);
-
 $script = <<<JS
     var feedsObj = feeds();
 
