@@ -61,7 +61,7 @@ function onFeedNew(event) {
   if (event.key === "Enter") {
     feedsObj = feeds();
     id = document.getElementById("newFeedInput").value;
-    feedsObj[id] = { id: id, name: id };
+    feedsObj[id] = { id: id, name: id, sections: [] };
     feeds(feedsObj);
   } else {
     return false;
@@ -81,24 +81,16 @@ function onFeedName(event, feedId) {
   }
 }
 
-function feed_add_single_playlist(getFeed, playlistId) {
+function feed_add_single_playlist(getFeed, playlistId, sectionName) {
   var feedObj = feeds();
 
   feed = document.getElementById("select-" + getFeed).value;
 
-  if (feedObj[feed].section === undefined) {
-    feedObj[feed].section = {
-      key: 0,
-      0: { playlistId: playlistId, type: "singlePlaylist" }
-    };
-  } else {
-    object_key = feedObj[feed].section.key + 1;
-    feedObj[feed].section = {
-      ...feedObj[feed].section,
-      key: object_key,
-      [object_key]: { playlistId: playlistId, type: "singlePlaylist" }
-    };
-  }
+  feedObj[feed]["sections"].push({
+    name: sectionName,
+    playlistId: playlistId,
+    type: "singlePlaylist"
+  });
 
   feeds(feedObj);
 }

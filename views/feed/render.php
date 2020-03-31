@@ -20,8 +20,11 @@ HTML;
 */
 $feedSections = "";
 
-if (isset($JSON->section)) {
-    foreach ($JSON->section as $section) {
+if (isset($JSON->sections)) {
+    foreach ($JSON->sections as $section) {
+        $feedSections .= <<<HTML
+            <h1>$section->name </h1>
+        HTML;
         $item = abutubeRender::parse($section, ["type" => "feed"]);
         $feedSections .= abutubeRender::itemRender($item, "horizontal");
     }

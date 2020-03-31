@@ -24,10 +24,10 @@ HTML;
 */
 $feedSections = "";
 
-if (isset($JSON->section)) {
-    foreach ($JSON->section as $section) {
+if (isset($JSON->sections)) {
+    foreach ($JSON->sections as $section) {
         $feedSections .= <<<HTML
-            <p>section</p>
+            <p>$section->name | <a href="">Remove</a></p> 
         HTML;
     }
 } else {

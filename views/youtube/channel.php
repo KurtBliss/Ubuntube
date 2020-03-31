@@ -51,7 +51,7 @@ $script = <<<JS
     var pickFeed = "";
     for (const feed in feedsObj) {
         pickFeed += "<option value='" + feed + "'>";
-        pickFeed += feed + " - " + feedsObj[feed]["name"];
+        pickFeed += feedsObj[feed]["name"];
         pickFeed += "</option>";
     }
     
@@ -77,10 +77,8 @@ $content = <<<HTML
             <p class="sectionTitle">
                 Uploads 
                 | <select id="select-$key" class="addToFeed" > 
-                </select>
-                 <select id="select-$key" class="addToFeed" > 
-                </select>
-                <button onclick="feed_add_single_playlist($key,'$uploadsPlaylist')">add to feed </button>
+                </select> 
+                <button onclick="feed_add_single_playlist($key,'$uploadsPlaylist', '$title Uploads')">add to feed </button>
             <p>
             <input type="text" hidden value="$uploadsPlaylist">
             <div>
