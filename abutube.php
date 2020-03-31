@@ -293,10 +293,9 @@ class abutubeRender
                             $parse = array_merge($parse, abutubeRender::parse(abutube::playlist_items($response->playlistId)));
                             break;
                         default:
-                            print_r(["Missing feed section type $response->type"]);
+                            // if $response
+                            // print_r(["Missing feed section type $response->type", $response]);
                     }
-                    // abutubeRender::parse(abutube::)
-                    // }
                     break;
                 default:
             }

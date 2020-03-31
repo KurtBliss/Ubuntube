@@ -14,6 +14,7 @@ echo <<<HTML
         <title>$title</title>
         <link rel="stylesheet" type="text/css" href="/style.css">
         <link rel="apple-touch-icon" href="/logo.png">
+        <meta name="apple-mobile-web-app-status-bar-style" content="363f63">
         <link rel="icon" href="/logo.png">
         <script src="/index.js"></script>
     </head>
