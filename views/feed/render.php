@@ -1,9 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/abutube.php";
-
 $JSON = json_decode($_POST["data"]);
-
-console_log($JSON, false);
 
 /*
 
