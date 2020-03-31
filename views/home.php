@@ -7,16 +7,7 @@ $noFeeds = <<<HTML
 HTML;
 
 $script = <<<JS
-    var feedsObj = feeds();
-    
-    for (const feed in feedsObj) {
-
-        console.log("feed", feed)
-
-        appendContainer('<a class="feed-home" target=_self href="feed/' + feed + '">' + feedsObj[feed]["name"] + '</a>', "feeds-list");
-
-        console.log(feedsObj[feed]);
-    }    
+    homeLoadFeeds()
 JS;
 
 $content = <<<HTML

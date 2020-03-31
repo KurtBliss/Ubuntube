@@ -18,6 +18,24 @@ function onSearch(event) {
   }
 }
 
+function homeLoadFeeds() {
+  var feedsObj = feeds();
+  for (const feed in feedsObj) {
+    appendToHomeFeeds(feedsObj, feed);
+  }
+}
+
+function appendToHomeFeeds(feedsObj, feed) {
+  appendContainer(
+    '<a class="feed-home" target=_self href="feed/' +
+      feed +
+      '">' +
+      feedsObj[feed]["name"] +
+      "</a>",
+    "feeds-list"
+  );
+}
+
 /*
 
     Menu
@@ -73,6 +91,7 @@ function NewFeedButton() {
   feedsObj = feeds();
   id = document.getElementById("newFeedInput").value;
   feedsObj[id] = { id: id, name: id, sections: [] };
+  appendToHomeFeeds(feedsObj, id);
   feeds(feedsObj);
 }
 
