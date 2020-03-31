@@ -78,6 +78,8 @@ $content = <<<HTML
                 Uploads 
                 | <select id="select-$key" class="addToFeed" > 
                 </select>
+                 <select id="select-$key" class="addToFeed" > 
+                </select>
                 <button onclick="feed_add_single_playlist($key,'$uploadsPlaylist')">add to feed </button>
             <p>
             <input type="text" hidden value="$uploadsPlaylist">
