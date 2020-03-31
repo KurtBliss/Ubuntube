@@ -315,3 +315,8 @@ function console_log($output, $with_script_tags = true)
     }
     echo $js_code;
 }
+
+function processP20($process)
+{
+    return str_replace(" ", "%20", $process);
+}

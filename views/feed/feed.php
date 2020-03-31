@@ -1,5 +1,5 @@
 <?php
-$feedId = $id;
+$feedId = urldecode($id);
 global $content;
 
 $script = <<<JS

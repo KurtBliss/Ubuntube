@@ -23,6 +23,7 @@ var menu_visible = false;
 
 function menuButton() {
   var element_main = document.getElementsByTagName("main")[0];
+  var element_main = document.getElementsByTagName("main")[0];
   var element_menu = document.getElementById("asideMenu");
 
   if (menu_visible) {
@@ -70,9 +71,10 @@ function onFeedNew(event) {
 function onFeedName(event, feedId) {
   if (event.key === "Enter") {
     feedsObj = feeds();
-    feedsObj[feedId] = {
-      name: document.getElementById("feedNameInput").value || "$feedId"
-    };
+
+    feedsObj[feedId].name =
+      document.getElementById("feedNameInput").value || "$feedId";
+
     feeds(feedsObj);
   } else {
     return false;
@@ -128,6 +130,7 @@ function renderFeed(data, feedId, edit = false) {
   }
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   console.log(data);
+
   xhttp.send("data=" + JSON.stringify(data[feedId]));
 }
 
