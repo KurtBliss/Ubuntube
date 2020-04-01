@@ -9,8 +9,8 @@ $JSON = json_decode($_POST["data"]);
 */
 $id = $JSON->id;
 $feedHead = <<<HTML
-    <h1>$JSON->name</h1>
-    <p><a href="/edit/$id">edit</a></p>
+    <h1 style="display:inline">$JSON->name</h1> | 
+    <a class="feed-option" href="/edit/$id">edit</a>
 HTML;
 
 /*
@@ -22,11 +22,16 @@ $feedSections = "";
 
 if (isset($JSON->sections)) {
     foreach ($JSON->sections as $section) {
-        $feedSections .= <<<HTML
-            <h1>$section->name </h1>
-        HTML;
         $item = abutubeRender::parse($section, ["type" => "feed"]);
-        $feedSections .= abutubeRender::itemRender($item, "horizontal");
+
+        $itemRender = abutubeRender::itemRender($item, "horizontal");
+
+        $feedSections .= <<<HTML
+            <section class="feed-section">
+                <h1>$section->name</h1>
+                $itemRender
+            </section>
+        HTML;
     }
 } else {
     $feedSections = <<<HTML
