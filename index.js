@@ -108,18 +108,35 @@ function onFeedName(event, feedId) {
   }
 }
 
-function feed_add_single_playlist(getFeed, playlistId, sectionName) {
-  var feedObj = feeds();
+// Makes new playlist
+// function feed_add_single_playlist(getFeed, playlistId, sectionName) {
+//   var feedObj = feeds();
 
-  feed = document.getElementById("select-" + getFeed).value;
+//   feed = document.getElementById("select-" + getFeed).value;
 
-  feedObj[feed]["sections"].push({
-    name: sectionName,
-    playlistId: playlistId,
-    type: "singlePlaylist"
-  });
+//   feedObj[feed]["sections"].push({
+//     name: sectionName,
+//     playlistId: playlistId,
+//     type: "singlePlaylist"
+//   });
 
-  feeds(feedObj);
+//   feeds(feedObj);
+// }
+
+function feed_add_playlist(getId, playlistId, sectionName) {
+  var feedsObj = feeds();
+  feed = document.getElementById("select-feed-" + getId).value;
+  section = document.getElementById("select-section-" + getId).value;
+  if (section == "-1") {
+    feedsObj[feed]["sections"].push({
+      name: sectionName,
+      playlists: [playlistId]
+    });
+  } else {
+    console.log("playlist added", feed, section);
+    feedsObj[feed]["sections"][section].playlists.push(playlistId);
+  }
+  feeds(feedsObj);
 }
 
 function feedRemove(feed) {

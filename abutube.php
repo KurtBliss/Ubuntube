@@ -197,9 +197,6 @@ class abutubeRender
                                 $parse,
                                 abutubeRender::parse(abutube::playlist_items($item->contentDetails->relatedPlaylists->uploads))
                             );
-
-
-                            // $parse[] = abutubeRender::parse(abutube::playlist_items($item->contentDetails->relatedPlaylists->uploads));
                         }
                         return $parse;
                     } else {
@@ -281,22 +278,12 @@ class abutubeRender
 
                     break;
                 default:
-                    echo "Missing item kind " . $response->kind . " ";
+                    echo "Missing item kind " . $response->kind . " !";
             }
         } else {
             switch ($set["type"]) {
                 case "feed":
-                    $parse = [];
-                    // foreach ($response->section as $section) {
-                    switch ($response->type) {
-                        case "singlePlaylist":
-                            $parse = array_merge($parse, abutubeRender::parse(abutube::playlist_items($response->playlistId)));
-                            break;
-                        default:
-                            // if $response
-                            // print_r(["Missing feed section type $response->type", $response]);
-                    }
-                    break;
+                    $parse = array_merge($parse, abutubeRender::parse(abutube::playlist_items($response)));
                 default:
             }
         }

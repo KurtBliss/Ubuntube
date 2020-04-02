@@ -47,22 +47,43 @@ foreach ($uploads as $upload) {
 }
 
 $script = <<<JS
-    var feedsObj = feeds();
-    var pickFeed = "";
-    for (const feed in feedsObj) {
-        pickFeed += "<option value='" + feed + "'>";
-        pickFeed += feedsObj[feed]["name"];
-        pickFeed += "</option>";
+    updateFeedSelect()
+    updateSectionSelect(Object.keys(feeds())[0])
+
+    function updateFeedSelect() {
+        var feedsObj = feeds();
+        var pickFeed = "";
+        for (const feed in feedsObj) {
+            pickFeed += "<option value='" + feed + "'>";
+            pickFeed += feedsObj[feed]["name"];
+            pickFeed += "</option>";
+        }
+        
+        var elements = document.getElementsByClassName("addToFeed");
+
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].innerHTML = pickFeed;
+        }
     }
     
-    var elements = document.getElementsByClassName("addToFeed");
+    function updateSectionSelect(feed) {
+        var feedsObj = feeds();
+        var sections = feedsObj[feed]["sections"];
+        console.log("got", sections)
+        var pickSection = '<option value="-1">As New Section</option>';
+        for (const section in sections) {
+            console.log(section)
+            pickSection += "<option value='" + section + "'>";
+            pickSection += sections[section]["name"];
+            pickSection += "</option>";
+        }
 
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].innerHTML = pickFeed;
+        // Updated elements
+        var elements = document.getElementsByClassName("addToSection");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].innerHTML = pickSection;
+        }
     }
-
-    
-
 JS;
 
 $content = <<<HTML
@@ -76,9 +97,10 @@ $content = <<<HTML
         <section class="container">
             <p class="sectionTitle">
                 Uploads 
-                | <select id="select-$key" class="addToFeed" > 
+                | <select id="select-feed-$key" class="addToFeed" > 
+                </select> <select id="select-section-$key" class="addToSection" > 
                 </select> 
-                <button onclick="feed_add_single_playlist($key,'$uploadsPlaylist', '$title Uploads')">add to feed </button>
+                <button onclick="feed_add_playlist($key,'$uploadsPlaylist', '$title Uploads')">add to feed </button>
             <p>
             <input type="text" hidden value="$uploadsPlaylist">
             <div>

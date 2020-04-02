@@ -22,9 +22,15 @@ $feedSections = "";
 
 if (isset($JSON->sections)) {
     foreach ($JSON->sections as $section) {
-        $item = abutubeRender::parse($section, ["type" => "feed"]);
+        $unsortedItems = [];
 
-        $itemRender = abutubeRender::itemRender($item, "horizontal");
+        foreach ($section->playlists as $playlistId) {
+            $unsortedItems = array_merge($unsortedItems, abutubeRender::parse($playlistId, ["type" => "feed"]));
+        }
+
+        shuffle($unsortedItems);
+
+        $itemRender = abutubeRender::itemRender($unsortedItems, "horizontal");
 
         $feedSections .= <<<HTML
             <section class="feed-section">
