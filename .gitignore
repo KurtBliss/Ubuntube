@@ -1,2 +1,4 @@
 secret.json
 vendor/
+credentials.json
+local-credentials.json
