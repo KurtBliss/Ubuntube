@@ -4,9 +4,9 @@ global $title, $content, $abutube;
 
 $q = $_GET["q"];
 
-$render = abutubeRender::itemRender(
-    abutubeRender::parse(
-        abutube::search(
+$render = itemRender(
+    parse(
+        search(
             $q,
             50
         )

@@ -14,7 +14,7 @@ function incKey()
     return $key;
 }
 
-$response = abutube::channel_data($id);
+$response = channel_data($id);
 
 $title = $response->items[0]->snippet->title;
 $desc = $response->items[0]->snippet->description;
@@ -26,7 +26,7 @@ $thumbnail = $thumbnails->default->url;
 
 $uploadsPlaylist = $response->items[0]->contentDetails->relatedPlaylists->uploads;
 
-$uploads = abutube::playlist_items(
+$uploads = playlist_items(
     $uploadsPlaylist
 )->items;
 

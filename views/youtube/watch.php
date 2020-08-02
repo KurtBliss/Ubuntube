@@ -2,14 +2,14 @@
 
 $videoId = $_GET["v"];
 
-$response = abutube::video_data($videoId);
+$response = video_data($videoId);
 
 $videoTitle = $response->items[0]->snippet->title;
 $videoDesc = $response->items[0]->snippet->description;
 $channelTitle = $response->items[0]->snippet->channelTitle;
 $channelId = $response->items[0]->snippet->channelId;
 
-$response = abutube::channel_data($channelId);
+$response = channel_data($channelId);
 $channelThumbnails = $response->items[0]->snippet->thumbnails;
 $channelThumbnail = $channelThumbnails->default->url;
 
