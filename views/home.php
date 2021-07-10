@@ -12,7 +12,7 @@ JS;
 
 $content = <<<HTML
     <main>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
 
         <h1 class="feed-home-section">Your Feeds:</h1>
         <section>
