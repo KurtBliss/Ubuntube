@@ -12,9 +12,8 @@ console_log($JSON);
 */
 $id = $JSON->id;
 $feedHead = <<<HTML
-    <h1>$JSON->name</h1>
-    <p><a href="/feed/$id">view</a></p>
-    <p><a href="#" onclick="return feedRemove('$id')">delete</a></p>
+    <h1>$JSON->name <a href="/feed/$id">view</a> <a href="#" onclick="return feedRemove('$id')">delete</a></h1>
+    <p></p>
 HTML;
 
 /*
@@ -27,7 +26,7 @@ $feedSections = "";
 if (isset($JSON->sections)) {
     foreach ($JSON->sections as $section) {
         $feedSections .= <<<HTML
-            <p>$section->name | <a href="">Remove</a></p> 
+            <p>$section->name | <a href="">Remove</a> | <a href="">Rename</a></p> 
         HTML;
     }
 } else {

@@ -262,13 +262,17 @@ aside {
 
 /*
 
-    List Content
+   Feed Render
 
 */
 
 #feed-container {
   color: white;
   margin-top: 20px;
+}
+
+#feed-container h1 {
+  color: black;
 }
 
 .feed-option {
@@ -283,6 +287,12 @@ aside {
   width: 150px;
   height: auto;
 }
+
+/* 
+
+    Feed Edit
+
+*/
 
 /* 
 
