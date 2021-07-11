@@ -1,7 +1,15 @@
 <?php
 
+$secret = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/secret.json"));
+
 if (!isset($_ENV["YOUTUBE_DEV_KEY"])) {
-    $_ENV["YOUTUBE_DEV_KEY"] = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/secret.json"))->devKey;
+    $_ENV["YOUTUBE_DEV_KEY"] = $secret->devKey;
+}
+if (!isset($_ENV["YOUTUBE_CLIENT_ID"])) {
+    $_ENV["YOUTUBE_CLIENT_ID"] = $secret->clientId;
+}
+if (!isset($_ENV["YOUTUBE_CLIENT_SECRET"])) {
+    $_ENV["YOUTUBE_CLIENT_SECRET"] = $secret->clientSecret;
 }
 
 function search($q, $maxResults = 25)
@@ -286,6 +294,17 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
 
     return $parse;
 }
+
+function google_auth_redirect()
+{
+    $id = $_ENV["YOUTUBE_CLIENT_ID"];
+    // $sec = $_ENV["YOUTUBE_CLIENT_SECRET"];
+    $url = "https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube.readonly&include_granted_scopes=true&state=state_parameter_passthrough_value&redirect_uri=http%3A%2F%2Flocalhost%2Foauth2callback&response_type=token&client_id=$id";
+    return $url;
+}
+
+// function google_auth_js()
+
 
 function console_log($output, $with_script_tags = true)
 {

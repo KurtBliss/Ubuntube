@@ -130,7 +130,7 @@ function feed_add_playlist(getId, playlistId, sectionName) {
   if (section == "-1") {
     feedsObj[feed]["sections"].push({
       name: sectionName,
-      playlists: [playlistId]
+      playlists: [playlistId],
     });
   } else {
     console.log("playlist added", feed, section);
@@ -153,7 +153,7 @@ function feedRemove(feed) {
 function renderFeed(data, feedId, edit = false) {
   document.getElementById("feed-container").innerHTML = "<p>rendering...</p>";
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
+  xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       document.getElementById("feed-container").innerHTML = this.responseText;
       href4ios();
@@ -197,7 +197,7 @@ function href4ios() {
   var a = document.getElementsByTagName("a");
   for (var i = 0; i < a.length; i++) {
     if (a[i].onclick == null)
-      a[i].onclick = function() {
+      a[i].onclick = function () {
         var href = this.getAttribute("href");
         if (href != null) {
           console.log(href);
@@ -208,4 +208,43 @@ function href4ios() {
         }
       };
   }
+}
+
+/*
+  google auth       
+  
+  Create form to request access token from Google's OAuth 2.0 server.
+*/
+function oauthSignIn() {
+  // Google's OAuth 2.0 endpoint for requesting an access token
+  var oauth2Endpoint = "https://accounts.google.com/o/oauth2/v2/auth";
+
+  // Create <form> element to submit parameters to OAuth 2.0 endpoint.
+  var form = document.createElement("form");
+  form.setAttribute("method", "GET"); // Send as a GET request.
+  form.setAttribute("action", oauth2Endpoint);
+
+  // Parameters to pass to OAuth 2.0 endpoint.
+  var params = {
+    client_id:
+      "201589520141-fuqoimont1hli3po8qfo90qc3vto970t.apps.googleusercontent.com",
+    redirect_uri: "https://ubuntube.herokuapp.com",
+    response_type: "token",
+    scope: "https://www.googleapis.com/auth/youtube.force-ssl",
+    include_granted_scopes: "true",
+    state: "pass-through value",
+  };
+
+  // Add form parameters as hidden input values.
+  for (var p in params) {
+    var input = document.createElement("input");
+    input.setAttribute("type", "hidden");
+    input.setAttribute("name", p);
+    input.setAttribute("value", params[p]);
+    form.appendChild(input);
+  }
+
+  // Add form to page and submit it to open the OAuth 2.0 endpoint.
+  document.body.appendChild(form);
+  form.submit();
 }

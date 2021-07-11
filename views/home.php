@@ -7,8 +7,13 @@ $noFeeds = <<<HTML
 HTML;
 
 $script = <<<JS
-    homeLoadFeeds()
+    homeLoadFeeds();
 JS;
+
+if ($_GET["auth"] == "true") {
+    $script .= "oauthSignIn();";
+}
+
 
 $content = <<<HTML
     <main>
