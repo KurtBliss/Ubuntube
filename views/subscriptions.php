@@ -5,10 +5,7 @@ session_start();
 
 if (isset($_SESSION["access_token"])) {
     $token = $_SESSION["access_token"];
-    $a = subscriptions($token);
-    $render = <<<HTML
-    $a
-HTML;
+    $render = subscriptions($token);
 } else {
     $render = <<<HTML
     <p>no access token</p>
@@ -18,7 +15,7 @@ HTML;
 $content = <<<HTML
     <main>
         <section>
-        $render;
+        $render
         </section>
     </main>
 HTML;
