@@ -119,12 +119,14 @@ function youtube_auth($resource, $params, $token)
     $context = stream_context_create($opts);
 
     $encode =
-        "https://developers.google.com/apis-explorer/#p/youtube/v3/youtube."
+        "https://www.googleapis.com/youtube/v3/"
         . $resource
         . "?key=" .  $_ENV["YOUTUBE_DEV_KEY"]
         . str_replace(" ", "%20", $parse);
 
     // Open the file using the HTTP headers set above
+    echo $encode . " \n";
+    print($context);
     $file = file_get_contents($encode, false, $context);
 
     return json_decode($file);
