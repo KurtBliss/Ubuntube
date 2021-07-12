@@ -33,7 +33,7 @@ $content = <<<HTML
             <img class="img-round" style="width:150px; height:150px" src="/logo.png">
             <p>Check out our <a href="https://github.com/KurtBliss/Ubuntube">github page</a></p>
         </div>
-        <button onClick="oauthSignIn();">test</button>
+        
         <script>$script</script>
     </main>
 HTML;

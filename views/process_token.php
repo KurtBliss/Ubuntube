@@ -3,25 +3,41 @@ global $title, $content;
 
 $render = "";
 
-if (isset($_GET["token"])) {
+$js = <<<JS
+
+JS;
+
+if (isset($_GET["access_token"])) {
     session_start();
-    $token = $_GET["token"];
-    // $_SESSION
+    $token = $_GET["access_token"];
+    $_SESSION["access_token"] = $token;
     $render = <<<HTML
-        <p>
-            Received token!
-        </p>
+        <h2>
+            Received token
+        </h2>
     HTML;
+    $js = <<<JS
+        console.log("THEE TOKEN!!", $token);
+    JS;
 } else {
     $render = <<<HTML
-        <p>
-            Log-In
-        </p>
+        <h2>
+            Client passing google's hashed params to server 
+        </h2>
     HTML;
+
+    $js .= <<<JS
+        form_get({}, "/?" + window.location.hash);
+    JS;
 }
 
 $content = <<<HTML
     <main>
-        $render
+        <section>
+            $render
+        </section>
+        <script>
+            $js
+        </script>
     </main>
 HTML;
