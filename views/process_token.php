@@ -17,8 +17,6 @@ if (isset($_GET["access_token"])) {
         </h2>
     HTML;
     $js = <<<JS
-        // alert("Received token ");
-        console.log("THEE TOKEN!!", $token);
         window.location = "/subscriptions";
     JS;
 } else {

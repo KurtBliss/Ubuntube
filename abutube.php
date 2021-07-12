@@ -54,6 +54,13 @@ function channel_data($id)
     ]);
 }
 
+function subscriptions()
+{
+    return youtube("subscription", [
+        "part" => "snippet,contentDetails"
+    ]);
+}
+
 function channel_sections($id)
 {
     return youtube("channelSections", [
