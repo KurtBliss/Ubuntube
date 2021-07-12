@@ -59,7 +59,7 @@ function subscriptions($token)
     echo "getting subscriptions!";
     return youtube_auth("subscription", [
         "part" => "snippet,contentDetails",
-        "mine" => true
+        "mine" => "true"
     ], $token);
 }
 
