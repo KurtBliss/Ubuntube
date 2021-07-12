@@ -54,10 +54,11 @@ function channel_data($id)
     ]);
 }
 
-function subscriptions()
+function subscriptions($token)
 {
     return youtube("subscription", [
-        "part" => "snippet,contentDetails"
+        "part" => "snippet,contentDetails",
+        "access_token" => $token
     ]);
 }
 

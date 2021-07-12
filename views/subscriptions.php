@@ -5,7 +5,7 @@ session_start();
 
 if (isset($_SESSION["access_token"])) {
     $token = $_SESSION["access_token"];
-    $a = subscriptions();
+    $a = subscriptions($token);
     $render = <<<HTML
     $a
 HTML;
