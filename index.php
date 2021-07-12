@@ -7,6 +7,7 @@ require_once "views/menu.php";
 
 session_start();
 
+echo $_SERVER['REQUEST_URI'];
 // $debug_info = "";
 
 echo $_GET["state"] . " ";
