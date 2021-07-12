@@ -7,15 +7,15 @@ require_once "views/menu.php";
 
 session_start();
 
-$debug_info = "";
+// $debug_info = "";
 
 echo $_GET["state"] . " ";
 
 if (isset($_GET["access_token"])) {
-    $debug_info += "has access_token!";
+    // $debug_info += "has access_token!";
     $_SESSION["access_token"] = $_GET["access_token"];
 } else {
-    $debug_info += "no token :( " . session_id() . " " . $_GET["access_token"];
+    // $debug_info += "no token :( " . session_id() . " " . $_GET["access_token"];
 }
 
 echo <<<HTML
@@ -40,8 +40,6 @@ echo <<<HTML
         $footer
         <script>
             this.href4ios(); 
-            // console.log("$_GET", );  
-            console.log("debug_info", $debug_info);
         </script>
     </body>
 </html>
