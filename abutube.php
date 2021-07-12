@@ -56,7 +56,7 @@ function channel_data($id)
 
 function subscriptions($token)
 {
-    return youtube("subscription", [
+    return youtube("subscription.list", [
         "part" => "snippet,contentDetails",
         "access_token" => $token
     ]);
