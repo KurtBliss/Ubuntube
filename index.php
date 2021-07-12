@@ -5,20 +5,6 @@ require_once "views/header.php";
 require_once "views/footer.php";
 require_once "views/menu.php";
 
-session_start();
-
-echo $_SERVER['REQUEST_URI'];
-// $debug_info = "";
-
-echo $_GET["state"] . " ";
-
-if (isset($_GET["access_token"])) {
-    // $debug_info += "has access_token!";
-    $_SESSION["access_token"] = $_GET["access_token"];
-} else {
-    // $debug_info += "no token :( " . session_id() . " " . $_GET["access_token"];
-}
-
 echo <<<HTML
 <html lang="en">
     <head>
