@@ -17,6 +17,7 @@ if (isset($_GET["access_token"])) {
         </h2>
     HTML;
     $js = <<<JS
+        alert("Received token ");
         console.log("THEE TOKEN!!", $token);
     JS;
 } else {
@@ -27,6 +28,7 @@ if (isset($_GET["access_token"])) {
     HTML;
 
     $js .= <<<JS
+        alert("Client passing google's hashed params to server ");
         form_get({}, "/?" + window.location.hash);
     JS;
 }
