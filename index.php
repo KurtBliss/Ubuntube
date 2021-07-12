@@ -7,7 +7,7 @@ require_once "views/menu.php";
 
 session_start();
 
-
+echo $_GET["state"] . " ";
 
 if (isset($_GET["access_token"])) {
     echo "has access_token!";
