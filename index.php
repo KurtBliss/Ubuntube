@@ -40,7 +40,7 @@ echo <<<HTML
         $footer
         <script>
             this.href4ios(); 
-            console.log("$_GET", $_GET);  
+            // console.log("$_GET", );  
             console.log("debug_info", $debug_info);
         </script>
     </body>
