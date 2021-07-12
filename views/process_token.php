@@ -17,8 +17,9 @@ if (isset($_GET["access_token"])) {
         </h2>
     HTML;
     $js = <<<JS
-        alert("Received token ");
+        // alert("Received token ");
         console.log("THEE TOKEN!!", $token);
+        window.location = "/subscriptions";
     JS;
 } else {
     $render = <<<HTML
@@ -29,8 +30,8 @@ if (isset($_GET["access_token"])) {
 
     $js .= <<<JS
         var param = window.location.hash.replace("#", "");
-        alert("param " + param);
-        alert("Client passing google's hashed params to server " + window.location.hash);
+        // alert("param " + param);
+        // alert("Client passing google's hashed params to server " + window.location.hash);
         window.location = "/process_token?" + param
         // form_get({}, "/process_token?" + param);
     JS;
