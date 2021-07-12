@@ -228,7 +228,7 @@ function oauthSignIn() {
   var params = {
     client_id:
       "201589520141-fuqoimont1hli3po8qfo90qc3vto970t.apps.googleusercontent.com",
-    redirect_uri: "https://ubuntube.herokuapp.com",
+    redirect_uri: "https://ubuntube.herokuapp.com/?",
     response_type: "token",
     scope: "https://www.googleapis.com/auth/youtube.force-ssl",
     include_granted_scopes: "true",
