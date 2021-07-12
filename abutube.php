@@ -119,7 +119,7 @@ function youtube_auth($resource, $params, $token)
     $context = stream_context_create($opts);
 
     $encode =
-        "https://www.googleapis.com/youtube/v3/"
+        "https://developers.google.com/apis-explorer/#p/youtube/v3/youtube."
         . $resource
         . "?key=" .  $_ENV["YOUTUBE_DEV_KEY"]
         . str_replace(" ", "%20", $parse);
