@@ -4,8 +4,11 @@ require_once "content.php";
 require_once "views/header.php";
 require_once "views/footer.php";
 require_once "views/menu.php";
+
 session_start();
+
 if (isset($_GET["access_token"])) {
+    echo "has access_token!";
     $_SESSION["access_token"] = $_GET["access_token"];
 }
 
