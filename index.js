@@ -232,7 +232,7 @@ function oauthSignIn() {
     response_type: "token",
     scope: "https://www.googleapis.com/auth/youtube.force-ssl",
     include_granted_scopes: "true",
-    state: "pass-through value",
+    state: "",
   };
 
   // Add form parameters as hidden input values.
