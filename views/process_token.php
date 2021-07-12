@@ -29,7 +29,8 @@ if (isset($_GET["access_token"])) {
 
     $js .= <<<JS
         alert("Client passing google's hashed params to server ");
-        form_get({}, "/?" + window.location.hash);
+        alert();
+        form_get({}, "/process_token?" + window.location.hash);
     JS;
 }
 
