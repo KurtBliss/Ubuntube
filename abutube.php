@@ -56,6 +56,7 @@ function channel_data($id)
 
 function subscriptions($token)
 {
+    echo "getting subscriptions!";
     return youtube("subscription.list", [
         "part" => "snippet,contentDetails",
         "access_token" => $token
@@ -85,6 +86,8 @@ function youtube($resource, $params)
         . $resource
         . "?key=" .  $_ENV["YOUTUBE_DEV_KEY"]
         . str_replace(" ", "%20", $parse);
+
+    echo " ecncode: " . $encode;
 
     return json_decode(
         file_get_contents(
