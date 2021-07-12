@@ -2,9 +2,9 @@
 
 $playlistId = $_GET["list"];
 
-$render = abutubeRender::itemRender(
-    abutubeRender::parse(
-        abutube::playlist_items(
+$render = itemRender(
+    parse(
+        playlist_items(
             $playlistId
         )
     )

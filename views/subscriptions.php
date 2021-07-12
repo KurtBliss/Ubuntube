@@ -5,9 +5,7 @@ session_start();
 
 if (isset($_SESSION["access_token"])) {
     $token = $_SESSION["access_token"];
-    $a = abutube::playlist_items(
-        $playlistId
-    );
+    $a = subscriptions();
     $render = <<<HTML
     $a
 HTML;
