@@ -36,6 +36,12 @@ $router->map('GET', '/subscriptions', function () {
     include "views/subscriptions.php";
 });
 
+$router->map('GET', '/process_token', function () {
+    global $title, $website_name;
+    $title = "process_token - $website_name";
+    include "views/process_token.php";
+});
+
 $router->map('GET', "/channel/[*:id]", function ($id) {
     global $title, $website_name;
     $title = "Channel - $website_name";
