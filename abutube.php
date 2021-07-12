@@ -57,11 +57,10 @@ function channel_data($id)
 function subscriptions($token)
 {
     echo "getting subscriptions!";
-    return youtube("subscription", [
+    return youtube_auth("subscription", [
         "part" => "snippet,contentDetails",
-        "access_token" => $token,
         "mine" => true
-    ]);
+    ], $token);
 }
 
 function channel_sections($id)
@@ -95,6 +94,40 @@ function youtube($resource, $params)
             $encode
         )
     );
+}
+
+function youtube_auth($resource, $params, $token)
+{
+
+    $parse = "";
+    foreach ($params as $key => $param) {
+        if (isset($param)) {
+            $parse .= "&" . $key . "=" . $param;
+        }
+    }
+    // --header 'Authorization: Bearer [YOUR_ACCESS_TOKEN]' \
+    // --header 'Accept: application/json' 
+
+    $opts = array(
+        'http' => array(
+            'method' => "GET",
+            'header' => "Authorization: Bearer $token \r\n" .
+                "Accept: application/json\r\n"
+        )
+    );
+
+    $context = stream_context_create($opts);
+
+    $encode =
+        "https://www.googleapis.com/youtube/v3/"
+        . $resource
+        . "?key=" .  $_ENV["YOUTUBE_DEV_KEY"]
+        . str_replace(" ", "%20", $parse);
+
+    // Open the file using the HTTP headers set above
+    $file = file_get_contents($encode, false, $context);
+
+    return json_decode($file);
 }
 
 
