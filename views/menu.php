@@ -5,35 +5,11 @@ global $menu;
 $menu = <<<HTML
 
   <aside id="asideMenu">
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
-    <p>feeds will go here....</p>
+    <ul>
+      <li><a href="/auth.php">login</a></li>
+      <li><a href="/subscriptions">subscriptions</a></li>
+      <li></li>
+    </ul>
+    
   </aside>
 HTML;

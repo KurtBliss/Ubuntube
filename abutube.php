@@ -239,6 +239,7 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
 
     $parse = [];
     if ($set["type"] === "auto") {
+
         switch ($response->kind) {
             case "youtube#channelListResponse":
                 if ($set["getContent"] === "true") {
@@ -256,6 +257,7 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                 }
                 break;
             case "youtube#channel":
+            case "youtube#subscription":
                 $parse = array_merge($parse, itemDataParams(
                     $response->kind,
                     $response->id,
@@ -286,6 +288,7 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                 break;
             case "youtube#playlistItemListResponse":
             case "youtube#searchListResponse":
+            case "youtube#SubscriptionListResponse":
                 foreach ($response->items as $item) {
                     $parse[] = parse($item);
                 }
@@ -329,7 +332,14 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
 
                 break;
             default:
-                echo "Missing item kind " . $response->kind . " !";
+                echo "Missing item kind (" . $response->kind . ") !";
+                // $dump = json_encode($response);
+                // echo $dump;
+                echo <<<HTML
+                    <script>
+                        console.log(`$dump`);
+                    </script>
+                HTML;
         }
     } else {
         switch ($set["type"]) {

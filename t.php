@@ -1,12 +1,9 @@
-<?php
-global $content;
+<?
 
 require_once 'vendor/autoload.php';
 require_once 'vendor/google/apiclient-services/src/YouTube.php';
 
 session_start();
-
-$render = "";
 
 $client = new Google_Client();
 $client->setAuthConfig('client_secret.json');
@@ -17,21 +14,8 @@ if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
     $youtube = new Google_Service_YouTube($client);
     $channel = $youtube->subscriptions->listSubscriptions('snippet', array('mine' => "true"));
     // $channel = $youtube->channels->listChannels('snippet', array('mine' => $mine));
-    $render = itemRender(
-        parse(
-            $channel
-        )
-    );
-    // echo json_encode($channel->items);
+    echo json_encode($channel);
 } else {
     $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/auth_process.php';
     header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
 }
-
-$content = <<<HTML
-    <main>
-        <section>
-        $render
-        </section>
-    </main>
-HTML;

@@ -318,6 +318,11 @@ footer {
   height: 5.5rem; /* Footer height */
 }
 
+#asideMenu a {
+  color: white;
+  text-decoration: none;
+}
+
 /*
 
     Mobile
