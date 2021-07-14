@@ -14,8 +14,12 @@
     "extra": {
         "google/apiclient-services": [
             "Drive",
-            "YouTube",
-            "Google"
+            "YouTube"
+        ]
+    },
+    "scripts": {
+        "compile": [
+            "chmod u+x /*.php"
         ]
     }
 }
