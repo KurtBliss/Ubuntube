@@ -4,6 +4,8 @@ require_once "content.php";
 require_once "views/header.php";
 require_once "views/footer.php";
 require_once "views/menu.php";
+// require_once "vendor/google/auth/autoload.php";
+// require_once "vendor/google/apiclient-services/autoload.php";
 
 echo <<<HTML
 <html lang="en">

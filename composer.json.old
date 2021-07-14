@@ -1,0 +1,22 @@
+{
+  "name": "abutubePHP",
+  "description": "custom ",
+  "require": {
+    "altorouter/altorouter": "1.1.0",
+    "google/apiclient": "^2.10"
+  },
+  "scripts": {
+    "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
+  },
+  "extra": {
+      "google/apiclient-services": [
+          "Drive",
+          "YouTube"
+      ]
+  },
+  "autoload": {
+    "classmap": [
+        "vendor/google/apiclient/src/Google"
+    ]
+  }
+}

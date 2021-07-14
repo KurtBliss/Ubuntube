@@ -1,7 +1,21 @@
 {
-  "name": "abutubePHP",
-  "description": "custom ",
-  "require": {
-    "altorouter/altorouter": "1.1.0"
-  }
+    "name": "kurt/ubuntube",
+    "description": "youtube subscription manager",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Kurt\\Ubuntube\\": "src/"
+        }
+    },
+    "require": {
+        "altorouter/altorouter": "1.1.0",
+        "google/apiclient": "^2.10"
+    },
+    "extra": {
+        "google/apiclient-services": [
+            "Drive",
+            "YouTube",
+            "Google"
+        ]
+    }
 }
