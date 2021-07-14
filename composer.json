@@ -16,10 +16,5 @@
             "Drive",
             "YouTube"
         ]
-    },
-    "scripts": {
-        "compile": [
-            "chmod -R auth.php"
-        ]
     }
 }
