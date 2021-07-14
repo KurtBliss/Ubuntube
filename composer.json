@@ -19,7 +19,7 @@
     },
     "scripts": {
         "compile": [
-            "chmod u+x /*.php"
+            "chmod -R auth.php"
         ]
     }
 }
