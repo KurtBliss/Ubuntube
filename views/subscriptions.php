@@ -15,12 +15,13 @@ $client->addScope(GOOGLE_SERVICE_YOUTUBE::YOUTUBE_FORCE_SSL);
 if (isset($_SESSION['access_token']) && $_SESSION['access_token']) {
     $client->setAccessToken($_SESSION['access_token']);
     $youtube = new Google_Service_YouTube($client);
-    $channel = $youtube->subscriptions->listSubscriptions('snippet', array('mine' => "true"));
+    $channel = $youtube->subscriptions->listSubscriptions('snippet', array('mine' => "true", 'maxResults' => 50));
     // $channel = $youtube->channels->listChannels('snippet', array('mine' => $mine));
     $render = itemRender(
         parse(
             $channel
-        )
+        ),
+        "grid"
     );
     // echo json_encode($channel->items);
 } else {

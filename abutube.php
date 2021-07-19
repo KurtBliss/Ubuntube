@@ -199,6 +199,75 @@ function itemRender($data = [], $layout = "list")
             HTML;
             break;
 
+        case "horizontal":
+            foreach ($data as $item) {
+                // Data from item
+                $type = $item["type"];
+                $id = $item["id"];
+                $title = $item["title"];
+                $thumbnail = $item["thumbnail"];
+                $desc = $item["desc"];
+                $link = $item["link"];
+
+                // echo $type;
+
+                if ($type == "youtube#channel") {
+                    $imgClass = "img-round";
+                } else {
+                    $imgClass = "";
+                }
+
+                $render .= <<<HTML
+                        <div class="list-item">
+                            <img class="$imgClass" src=$thumbnail>
+                            <p><a href=$link>$title</a></p>
+                        </div>
+                    HTML;
+            }
+            $render = <<<HTML
+                <div class="list-horizontal">
+                    <div class="list-horizontal-left" onclick="slideBack()"> < </div>
+                    $render
+                    <div class="list-horizontal-right" onClick="slide()"> > </div>
+                </div>
+            HTML;
+            break;
+
+        case "grid":
+            foreach ($data as $item) {
+                // Data from item
+                $type = $item["type"];
+                $id = $item["id"];
+                $title = $item["title"];
+                $thumbnail = $item["thumbnail"];
+                $desc = $item["desc"];
+                $link = $item["link"];
+
+                // echo $type;
+
+                if ($type == "youtube#channel") {
+                    $imgClass = "img-round";
+                } else {
+                    $imgClass = "";
+                }
+
+                $render .= <<<HTML
+                        <a href=$link><div class="list-grid-item">
+                            <img class="$imgClass list-grid-item-image" src=$thumbnail>
+                            <p class="list-grid-item-title"><a href=$link>$title</a></p>
+                            <p class="list-grid-item-description">$desc</p>
+                        </div></a>
+                    HTML;
+            }
+            $render = <<<HTML
+                <div class="list-grid">
+                    <!-- <div class="list-horizontal-left" onclick="slideBack()"> < </div> -->
+                    $render
+                    <!-- <div class="list-horizontal-right" onClick="slide()"> > </div> -->
+                </div>
+            HTML;
+            break;
+
         case "list":
         default:
             foreach ($data as $item) {
@@ -220,8 +289,8 @@ function itemRender($data = [], $layout = "list")
 
                 $render .= <<<HTML
                     <div>
-                        <img class="$imgClass" src=$thumbnail>
-                        <p><a href=$link>$title</a></p>
+                        <img class="$imgClass" src=$thumbnail class="gird-i">
+                        <p class="grid-p"><a href=$link class="grid-a">$title</a></p>
                     </div>
                 HTML;
             }
@@ -333,8 +402,8 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                 break;
             default:
                 echo "Missing item kind (" . $response->kind . ") !";
-                // $dump = json_encode($response);
-                // echo $dump;
+                $dump = json_encode($response);
+                echo $dump;
                 echo <<<HTML
                     <script>
                         console.log(`$dump`);

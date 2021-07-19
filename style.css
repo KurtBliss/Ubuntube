@@ -138,6 +138,61 @@ Body Home
   right: 0px;
 }
 
+.list-grid {
+  display: block;
+}
+
+.list-grid a:link {
+  color: black;
+}
+.list-grid a:visited {
+  color: black;
+}
+
+.list-grid-item {
+  display: grid;
+  grid-template-areas:
+    "img img img title title title title title"
+    "img img img desc  desc  desc  desc  desc"
+    "img img img desc  desc  desc  desc  desc";
+
+  display: inline-block;
+  /* width: 125px; */
+  /* height: 125px; */
+  margin: 5px;
+  border: 5px solid hsl(194, 100%, 97%);
+  border-top-width: 10px;
+  background-color: hsl(194, 100%, 97%);
+  /* text-align: center; */
+}
+
+.list-grid-item-image {
+  grid-area: img;
+}
+.list-grid-item-title {
+  grid-area: title;
+}
+.list-grid-item-description {
+  grid-area: desc;
+}
+
+.list-grid-item p a {
+  /* word-wrap: break-word;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
+  text-decoration: none;
+
+  display: inline-block;
+  max-width: 80%;
+  height: 2.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
 /*** 
 
   Scrollbar 
