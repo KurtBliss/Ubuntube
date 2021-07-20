@@ -8,8 +8,8 @@ JS;
 
 $content = <<<HTML
     <main>
-        <div id="feed-container">
-        </div>
+        <section id="feed-container">
+        </section>
     </main>
     <script>$script</script>
 HTML;

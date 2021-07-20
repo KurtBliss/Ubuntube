@@ -95,14 +95,18 @@ function NewFeedButton() {
   feeds(feedsObj);
 }
 
-function onFeedName(event, feedId) {
+function onFeedName(event, feedId, update = false) {
   if (event.key === "Enter") {
     feedsObj = feeds();
 
     feedsObj[feedId].name =
-      document.getElementById("feedNameInput").value || "$feedId";
+      document.getElementById("feedNameInput").value || feedId;
 
     feeds(feedsObj);
+
+    if (update) {
+      renderFeed(feeds(), feedId, true);
+    }
   } else {
     return false;
   }

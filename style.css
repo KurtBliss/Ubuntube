@@ -17,6 +17,7 @@ body {
 body {
   /* max-width: 960px; */
   margin: 0 auto;
+  padding: 2px;
 }
 
 main {
@@ -34,7 +35,7 @@ section {
   margin: 10px;
   border-radius: 10px;
   padding: 15px;
-  padding-top: 1px;
+  padding-top: 4 px;
 }
 
 section p {
@@ -140,6 +141,7 @@ Body Home
 
 .list-grid {
   display: block;
+  box-align: center;
 }
 
 .list-grid a:link {
@@ -157,13 +159,13 @@ Body Home
     "img img img desc  desc  desc  desc  desc";
 
   display: inline-block;
-  /* width: 125px; */
-  /* height: 125px; */
-  margin: 5px;
-  border: 5px solid hsl(194, 100%, 97%);
-  border-top-width: 10px;
+  width: 135px;
+  height: 125px;
+  margin: 2px;
+  border: 2px solid hsl(194, 100%, 97%);
+  border-top-width: 5px;
   background-color: hsl(194, 100%, 97%);
-  /* text-align: center; */
+  text-align: center;
 }
 
 .list-grid-item-image {
@@ -174,6 +176,12 @@ Body Home
 }
 .list-grid-item-description {
   grid-area: desc;
+  /* max-width: 80%;
+  height: 2.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center; */
 }
 
 .list-grid-item p a {
@@ -222,11 +230,12 @@ Body Home
 */
 #nav-toggle {
   color: #00d5ff;
+  padding: 3px;
 }
 
 .headerTopBar {
   display: grid;
-  grid-template-columns: 175px auto;
+  grid-template-columns: 180px auto;
   column-gap: 20px;
   width: 99%;
   margin-left: auto;
@@ -238,9 +247,12 @@ Body Home
   display: inline;
   font-size: 20px;
   text-align: center;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
   text-decoration: none;
   user-select: none;
   margin: 10px 0;
+  padding: 3px;
 }
 
 .header-nav {
@@ -264,6 +276,8 @@ Body Home
 .searchWrapper {
   display: grid;
   grid-template-columns: auto 32px;
+  margin: 5px;
+  margin-top: 0;
 }
 
 .searchWrapper a {
@@ -271,6 +285,7 @@ Body Home
   font-size: 20px;
   display: inline;
   cursor: pointer;
+  padding-right: 3px;
 }
 
 .searchInput {
@@ -279,6 +294,7 @@ Body Home
   font-size: 1rem;
   color: white;
   background-color: black;
+  /* padding: 3px; */
 }
 
 /* 
@@ -331,7 +347,7 @@ aside {
 }
 
 .feed-option {
-  color: white;
+  /* color: white; */
 }
 
 .feed-section a {

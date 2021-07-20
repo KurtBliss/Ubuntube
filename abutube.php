@@ -199,39 +199,39 @@ function itemRender($data = [], $layout = "list")
             HTML;
             break;
 
-        case "horizontal":
-            foreach ($data as $item) {
-                // Data from item
-                $type = $item["type"];
-                $id = $item["id"];
-                $title = $item["title"];
-                $thumbnail = $item["thumbnail"];
-                $desc = $item["desc"];
-                $link = $item["link"];
+            // case "horizontal":
+            //     foreach ($data as $item) {
+            //         // Data from item
+            //         $type = $item["type"];
+            //         $id = $item["id"];
+            //         $title = $item["title"];
+            //         $thumbnail = $item["thumbnail"];
+            //         $desc = $item["desc"];
+            //         $link = $item["link"];
 
-                // echo $type;
+            //         // echo $type;
 
-                if ($type == "youtube#channel") {
-                    $imgClass = "img-round";
-                } else {
-                    $imgClass = "";
-                }
+            //         if ($type == "youtube#channel") {
+            //             $imgClass = "img-round";
+            //         } else {
+            //             $imgClass = "";
+            //         }
 
-                $render .= <<<HTML
-                        <div class="list-item">
-                            <img class="$imgClass" src=$thumbnail>
-                            <p><a href=$link>$title</a></p>
-                        </div>
-                    HTML;
-            }
-            $render = <<<HTML
-                <div class="list-horizontal">
-                    <div class="list-horizontal-left" onclick="slideBack()"> < </div>
-                    $render
-                    <div class="list-horizontal-right" onClick="slide()"> > </div>
-                </div>
-            HTML;
-            break;
+            //         $render .= <<<HTML
+            //                 <div class="list-item">
+            //                     <img class="$imgClass" src=$thumbnail>
+            //                     <p><a href=$link>$title</a></p>
+            //                 </div>
+            //             HTML;
+            //     }
+            //     $render = <<<HTML
+            //         <div class="list-horizontal">
+            //             <div class="list-horizontal-left" onclick="slideBack()"> < </div>
+            //             $render
+            //             <div class="list-horizontal-right" onClick="slide()"> > </div>
+            //         </div>
+            //     HTML;
+            //     break;
 
         case "grid":
             foreach ($data as $item) {
@@ -252,11 +252,13 @@ function itemRender($data = [], $layout = "list")
                 }
 
                 $render .= <<<HTML
-                        <a href=$link><div class="list-grid-item">
-                            <img class="$imgClass list-grid-item-image" src=$thumbnail>
-                            <p class="list-grid-item-title"><a href=$link>$title</a></p>
-                            <p class="list-grid-item-description">$desc</p>
-                        </div></a>
+                        <a href=$link>
+                            <div class="list-grid-item">
+                                <img class="$imgClass list-grid-item-image" src=$thumbnail>
+                                <p class="list-grid-item-title"><a href=$link>$title</a></p>
+                                <!-- <p class="list-grid-item-description">$desc</p> -->
+                            </div>
+                        </a>
                     HTML;
             }
             $render = <<<HTML
@@ -326,7 +328,6 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                 }
                 break;
             case "youtube#channel":
-            case "youtube#subscription":
                 $parse = array_merge($parse, itemDataParams(
                     $response->kind,
                     $response->id,
@@ -334,6 +335,16 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                     $response->snippet->thumbnails->default->url,
                     $response->snippet->description,
                     "/channel/$response->id"
+                ));
+                break;
+            case "youtube#subscription":
+                $parse = array_merge($parse, itemDataParams(
+                    $response->kind,
+                    $response->id,
+                    $response->snippet->title,
+                    $response->snippet->thumbnails->default->url,
+                    $response->snippet->description,
+                    "/channel/" . $response->snippet->resourceId->channelId
                 ));
                 break;
             case "youtube#channelSection":
