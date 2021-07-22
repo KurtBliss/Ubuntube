@@ -278,3 +278,40 @@ function form_get(params, endpoint = "/") {
   document.body.appendChild(form);
   form.submit();
 }
+
+// Feeds
+
+function updateFeedSelect() {
+  var feedsObj = feeds();
+  var pickFeed = "";
+  for (const feed in feedsObj) {
+    pickFeed += "<option value='" + feed + "'>";
+    pickFeed += feedsObj[feed]["name"];
+    pickFeed += "</option>";
+  }
+
+  var elements = document.getElementsByClassName("addToFeed");
+
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].innerHTML = pickFeed;
+  }
+}
+
+function updateSectionSelect(feed) {
+  var feedsObj = feeds();
+  var sections = feedsObj[feed]["sections"];
+  console.log("got", sections);
+  var pickSection = '<option value="-1">As New Section</option>';
+  for (const section in sections) {
+    console.log(section);
+    pickSection += "<option value='" + section + "'>";
+    pickSection += sections[section]["name"];
+    pickSection += "</option>";
+  }
+
+  // Updated elements
+  var elements = document.getElementsByClassName("addToSection");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].innerHTML = pickSection;
+  }
+}

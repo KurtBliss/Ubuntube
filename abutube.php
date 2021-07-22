@@ -46,12 +46,35 @@ function playlist_items($id, $max = 50)
     ]);
 }
 
-function channel_data($id)
+function channel_data($channelId)
 {
     return youtube("channels", [
-        "id" => $id,
+        "id" => $channelId,
         "part" => "snippet,contentDetails"
     ]);
+}
+
+function channel_get_uploads($channelId)
+{
+    return channel_parse_uploads(channel_data($channelId));
+}
+
+function channel_parse_uploads($response)
+{
+    return $response->items[0]->contentDetails->relatedPlaylists->uploads;
+}
+
+
+function feed_add_playlist_button($key, $uploadsPlaylist, $title)
+{
+    $ren = <<<HTML
+        <select id="select-feed-$key" class="addToFeed" > 
+                </select> <select id="select-section-$key" class="addToSection" > 
+                </select> 
+                <button onclick="feed_add_playlist($key,'$uploadsPlaylist', '$title Uploads')">add to feed </button>
+    HTML;
+
+    return $ren;
 }
 
 function subscriptions($token)

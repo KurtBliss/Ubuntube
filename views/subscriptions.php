@@ -11,13 +11,15 @@ try {
     $client->addScope(GOOGLE_SERVICE_YOUTUBE::YOUTUBE_FORCE_SSL);
     $client->setAccessToken($_SESSION['access_token']);
     $youtube = new Google_Service_YouTube($client);
-    $channel = $youtube->subscriptions->listSubscriptions('snippet', array('mine' => "true", 'maxResults' => 50));
+    $subscriptions = $youtube->subscriptions->listSubscriptions('snippet,contentDetails', array('mine' => "true", 'maxResults' => 50));
+
     $render = itemRender(
         parse(
-            $channel
+            $subscriptions
         ),
         "grid"
     );
+    $render .= json_encode($subscriptions);
 } catch (exception $e) {
     $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/auth_process.php';
     header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
