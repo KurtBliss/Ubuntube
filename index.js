@@ -143,6 +143,26 @@ function feed_add_playlist(getId, playlistId, sectionName) {
   feeds(feedsObj);
 }
 
+function feed_add_channel(channelId, container) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      // document.getElementById("feed-container").innerHTML =
+      console.log("response feed_add_channel status 200", this.responseText);
+
+      document.getElementById(container).innerHTML = this.responseText;
+
+      updateFeedSelect();
+      updateSectionSelect(Object.keys(feeds())[0]);
+
+      href4ios();
+    }
+  };
+  xhttp.open("POST", "/channel-playlist.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("channelId=" + channelId);
+}
+
 function feedRemove(feed) {
   var feedObj = feeds();
   delete feedObj[feed];

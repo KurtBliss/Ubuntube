@@ -68,10 +68,10 @@ function channel_parse_uploads($response)
 function feed_add_playlist_button($key, $uploadsPlaylist, $title)
 {
     $ren = <<<HTML
-        <select id="select-feed-$key" class="addToFeed" > 
-                </select> <select id="select-section-$key" class="addToSection" > 
+        <select id="select-feed-$key" class="addToFeed" onchange='updateFeedSelect();updateSectionSelect(Object.keys(feeds())[0]);'> 
+                </select> <select id="select-section-$key" class="addToSection"  > 
                 </select> 
-                <button onclick="feed_add_playlist($key,'$uploadsPlaylist', '$title Uploads')">add to feed </button>
+                <button id="select_feed_button_$key" onclick="feed_add_playlist($key,'$uploadsPlaylist', '$title Uploads')">add to feed </button>
     HTML;
 
     return $ren;
@@ -183,7 +183,7 @@ function itemDataParams($type, $id, $title, $thumbnail, $desc, $link)
     ];
 }
 
-function itemRender($data = [], $layout = "list")
+function itemRender($data = [], $layout = "list", $feed_button = false)
 {
     $render = "";
 
@@ -257,8 +257,10 @@ function itemRender($data = [], $layout = "list")
             //     break;
 
         case "grid":
+            $key = -1;
             foreach ($data as $item) {
                 // Data from item
+                $key += 1;
                 $type = $item["type"];
                 $id = $item["id"];
                 $title = $item["title"];
@@ -274,12 +276,27 @@ function itemRender($data = [], $layout = "list")
                     $imgClass = "";
                 }
 
+                $render_feed_button = "";
+
+                if ($feed_button) {
+                    $render_feed_button = <<<HTML
+                        <button 
+                            id="feed_button_$key" 
+                            onclick='feed_add_channel("$id", "feed_sec_$key");
+                                document.getElementById("feed_button_$key").style.display="none";'>
+                                add to feed
+                        </button>
+                    HTML;
+                }
+
                 $render .= <<<HTML
                         <a href=$link>
                             <div class="list-grid-item">
                                 <img class="$imgClass list-grid-item-image" src=$thumbnail>
                                 <p class="list-grid-item-title"><a href=$link>$title</a></p>
                                 <!-- <p class="list-grid-item-description">$desc</p> -->
+                                $render_feed_button
+                                <div id="feed_sec_$key"></div>
                             </div>
                         </a>
                     HTML;
@@ -363,7 +380,7 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
             case "youtube#subscription":
                 $parse = array_merge($parse, itemDataParams(
                     $response->kind,
-                    $response->id,
+                    $response->snippet->resourceId->channelId,
                     $response->snippet->title,
                     $response->snippet->thumbnails->default->url,
                     $response->snippet->description,

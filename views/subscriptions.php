@@ -17,7 +17,8 @@ try {
         parse(
             $subscriptions
         ),
-        "grid"
+        "grid",
+        true
     );
     $render .= json_encode($subscriptions);
 } catch (exception $e) {
