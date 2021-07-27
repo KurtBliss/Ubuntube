@@ -106,7 +106,7 @@ Body Home
 
 .list-item {
   white-space: normal;
-  width: 240px;
+  width: 340px;
   display: inline-block;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -355,8 +355,22 @@ aside {
 }
 
 .feed-section .list-item {
-  width: 150px;
+  margin: 5px;
+  width: 240px;
   height: auto;
+  vertical-align: top;
+}
+
+.feed-section .list-item img {
+  width: 240px;
+}
+
+.list-item-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
 }
 
 /* 

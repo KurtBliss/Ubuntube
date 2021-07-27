@@ -12,6 +12,27 @@ if (!isset($_ENV["YOUTUBE_CLIENT_SECRET"])) {
     $_ENV["YOUTUBE_CLIENT_SECRET"] = $secret->clientSecret;
 }
 
+
+const THUMB_MED = "medium";
+const THUMB_DEF = "default";
+
+function thumbnail($data, $quality)
+{
+    switch ($quality) { //$response->snippet->thumbnails   ->medium->url
+
+        case "default":
+            return $data->default->url;
+            break;
+        case "medium":
+            return $data->medium->url;
+            break;
+        default:
+            echo "missing thumbnail $quality";
+            break;
+    }
+}
+
+
 function search($q, $maxResults = 25)
 {
     return youtube("search", [
@@ -183,7 +204,7 @@ function itemDataParams($type, $id, $title, $thumbnail, $desc, $link)
     ];
 }
 
-function itemRender($data = [], $layout = "list", $feed_button = false)
+function itemRender($data = [], $layout = "list", $feed_button = false, $quality = "default")
 {
     $render = "";
 
@@ -194,7 +215,7 @@ function itemRender($data = [], $layout = "list", $feed_button = false)
                 $type = $item["type"];
                 $id = $item["id"];
                 $title = $item["title"];
-                $thumbnail = $item["thumbnail"];
+                $thumbnail = thumbnail($item["thumbnail"], $quality);
                 $desc = $item["desc"];
                 $link = $item["link"];
 
@@ -209,7 +230,7 @@ function itemRender($data = [], $layout = "list", $feed_button = false)
                 $render .= <<<HTML
                         <div class="list-item">
                             <img class="$imgClass" src=$thumbnail>
-                            <p><a href=$link>$title</a></p>
+                            <p class="list-item-title"><a href=$link>$title</a></p>
                         </div>
                     HTML;
             }
@@ -264,7 +285,7 @@ function itemRender($data = [], $layout = "list", $feed_button = false)
                 $type = $item["type"];
                 $id = $item["id"];
                 $title = $item["title"];
-                $thumbnail = $item["thumbnail"];
+                $thumbnail = $thumbnail = thumbnail($item["thumbnail"], $quality); //$item["thumbnail"];
                 $desc = $item["desc"];
                 $link = $item["link"];
 
@@ -317,7 +338,7 @@ function itemRender($data = [], $layout = "list", $feed_button = false)
                 $type = $item["type"];
                 $id = $item["id"];
                 $title = $item["title"];
-                $thumbnail = $item["thumbnail"];
+                $thumbnail = $thumbnail = thumbnail($item["thumbnail"], $quality); //$item["thumbnail"];
                 $desc = $item["desc"];
                 $link = $item["link"];
 
@@ -372,7 +393,7 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                     $response->kind,
                     $response->id,
                     $response->snippet->title,
-                    $response->snippet->thumbnails->default->url,
+                    $response->snippet->thumbnails,
                     $response->snippet->description,
                     "/channel/$response->id"
                 ));
@@ -382,7 +403,7 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                     $response->kind,
                     $response->snippet->resourceId->channelId,
                     $response->snippet->title,
-                    $response->snippet->thumbnails->default->url,
+                    $response->snippet->thumbnails,
                     $response->snippet->description,
                     "/channel/" . $response->snippet->resourceId->channelId
                 ));
@@ -400,7 +421,7 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                         $response->kind,
                         $response->id,
                         $response->snippet->title,
-                        $response->snippet->thumbnails->default->url,
+                        $response->snippet->thumbnails,
                         $response->snippet->description,
                         "/playlist?list=$response->id"
                     ));
@@ -418,7 +439,7 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                     $response->kind,
                     $response->snippet->resourceId->videoId, //video-id?
                     $response->snippet->title,
-                    $response->snippet->thumbnails->default->url,
+                    $response->snippet->thumbnails,
                     $response->snippet->description,
                     "/watch?v=" . $response->snippet->resourceId->videoId
                 ));
@@ -431,7 +452,7 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                             $response->id->kind,
                             $response->id->videoId,
                             $response->snippet->title,
-                            $response->snippet->thumbnails->default->url,
+                            $response->snippet->thumbnails,
                             $response->snippet->description,
                             $link
                         );
@@ -442,7 +463,7 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                             $response->id->kind,
                             $response->id->channelId,
                             $response->snippet->title,
-                            $response->snippet->thumbnails->default->url,
+                            $response->snippet->thumbnails,
                             $response->snippet->description,
                             $link
                         );

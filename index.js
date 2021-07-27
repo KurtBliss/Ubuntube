@@ -335,3 +335,11 @@ function updateSectionSelect(feed) {
     elements[i].innerHTML = pickSection;
   }
 }
+
+function reloadCss() {
+  var links = document.getElementsByTagName("link");
+  for (var cl in links) {
+    var link = links[cl];
+    if (link.rel === "stylesheet") link.href += "";
+  }
+}

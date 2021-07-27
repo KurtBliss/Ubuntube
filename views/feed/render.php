@@ -30,7 +30,7 @@ if (isset($JSON->sections)) {
 
         shuffle($unsortedItems);
 
-        $itemRender = itemRender($unsortedItems, "horizontal");
+        $itemRender = itemRender($unsortedItems, "horizontal", false, "medium");
 
         $feedSections .= <<<HTML
             <section class="feed-section">
