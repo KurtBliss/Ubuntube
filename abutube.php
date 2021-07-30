@@ -62,7 +62,7 @@ function playlist_data($id)
     ]);
 }
 
-function playlist_items($id, $max = 50)
+function playlist_items($id, $max = 5)
 {
     return youtube("playlistItems", [
         "playlistId" => $id,
@@ -135,46 +135,17 @@ function videos_details($videos)
         }
     }
     $youtube_path = $_SERVER['DOCUMENT_ROOT'] . "/youtube.php";
-
     require_once $youtube_path;
-    require_once "vendor/google/auth/autoload.php";
-    // require_once $client_path;
-
-    // print_r($video_ids);
 
     $q_params = [
         "id" => $video_ids[0]
     ];
-
-    // print($video_ids);
-
-    // print_r($q_params["id"]);
-
-    // try {
     $response = $youtube->videos->listVideos('contentDetails,statistics', $q_params);
-    // } catch (Exception $err) {
-    //     // print_r($err);
-    // }
 
-    // echo json_encode($response);
+    print(json_encode($response));
 
+    // TODO: place video details in given array
 
-    // $rt = $_SERVER['DOCUMENT_ROOT'];
-    // $rt .= "\n" . 
-    // $rt .= "\n" . 
-    // print("\n $rt \n");
-    //  "youtube.php";
-    // require $_SERVER['DOCUMENT_ROOT'] . "/youtube.php";
-    // $client = new Google_Client();
-    // $client->setAuthConfig($_SERVER['DOCUMENT_ROOT'] . '/client_secret.json');
-    // $client->addScope(GOOGLE_SERVICE_YOUTUBE::YOUTUBE_FORCE_SSL);
-    // $client->setAccessToken($_SESSION['access_token']);
-    // $youtube = new Google_Service_YouTube($client);
-
-    // foreach($return_videos as $key => $vid) {
-    // }
-
-    // var_dump($response);
     return $return_videos;
 }
 
