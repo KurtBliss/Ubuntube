@@ -1,5 +1,10 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/google/apiclient-services/src/YouTube.php";
 require_once $_SERVER['DOCUMENT_ROOT'] . "/abutube.php";
+
+
+
 $JSON = json_decode($_POST["data"]);
 
 /*
@@ -28,13 +33,17 @@ if (isset($JSON->sections)) {
             $unsortedItems = array_merge($unsortedItems, parse($playlistId, ["type" => "feed"]));
         }
 
+        // print(json_encode($unsortedItems[0]));
+
+        $unsortedItems = videos_details($unsortedItems);
+
         shuffle($unsortedItems);
 
         $itemRender = itemRender($unsortedItems, "horizontal", false, "medium");
 
         $feedSections .= <<<HTML
             <section class="feed-section">
-                <h1>$section->name</h1>
+                <h1 class="feed-section-title">$section->name</h1>
                 $itemRender
             </section>
         HTML;

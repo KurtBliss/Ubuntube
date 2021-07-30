@@ -6,11 +6,8 @@ session_start();
 $render = "";
 
 try {
-    $client = new Google_Client();
-    $client->setAuthConfig('client_secret.json');
-    $client->addScope(GOOGLE_SERVICE_YOUTUBE::YOUTUBE_FORCE_SSL);
-    $client->setAccessToken($_SESSION['access_token']);
-    $youtube = new Google_Service_YouTube($client);
+    include "youtube.php";
+
     $subscriptions = $youtube->subscriptions->listSubscriptions('snippet,contentDetails', array('mine' => "true", 'maxResults' => 50));
 
     $render = itemRender(
@@ -20,7 +17,7 @@ try {
         "grid",
         true
     );
-    $render .= json_encode($subscriptions);
+    // $render .= json_encode($subscriptions);
 } catch (exception $e) {
     $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/auth_process.php';
     header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));

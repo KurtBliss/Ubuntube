@@ -1,5 +1,9 @@
 <?php
 
+// require_once 'vendor/autoload.php';
+// require_once 'vendor/google/apiclient-services/src/YouTube.php';
+// require_once "youtube.php";
+
 $secret = json_decode(file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/secret.json"));
 
 if (!isset($_ENV["YOUTUBE_DEV_KEY"])) {
@@ -116,6 +120,64 @@ function channel_sections($id)
     ]);
 }
 
+function videos_details($videos)
+{
+    $return_videos = $videos;
+    $video_ids = [""];
+    $calls = 1;
+    $pos = 0;
+    foreach ($return_videos as $key => $vid) {
+        $video_ids[$calls - 1] .= $vid["id"] . ",";
+        $pos += 1;
+        if ($pos == 49) {
+            $pos = 0;
+            $calls += 1;
+        }
+    }
+    $youtube_path = $_SERVER['DOCUMENT_ROOT'] . "/youtube.php";
+
+    require_once $youtube_path;
+    require_once "vendor/google/auth/autoload.php";
+    // require_once $client_path;
+
+    // print_r($video_ids);
+
+    $q_params = [
+        "id" => $video_ids[0]
+    ];
+
+    // print($video_ids);
+
+    // print_r($q_params["id"]);
+
+    // try {
+    $response = $youtube->videos->listVideos('contentDetails,statistics', $q_params);
+    // } catch (Exception $err) {
+    //     // print_r($err);
+    // }
+
+    // echo json_encode($response);
+
+
+    // $rt = $_SERVER['DOCUMENT_ROOT'];
+    // $rt .= "\n" . 
+    // $rt .= "\n" . 
+    // print("\n $rt \n");
+    //  "youtube.php";
+    // require $_SERVER['DOCUMENT_ROOT'] . "/youtube.php";
+    // $client = new Google_Client();
+    // $client->setAuthConfig($_SERVER['DOCUMENT_ROOT'] . '/client_secret.json');
+    // $client->addScope(GOOGLE_SERVICE_YOUTUBE::YOUTUBE_FORCE_SSL);
+    // $client->setAccessToken($_SESSION['access_token']);
+    // $youtube = new Google_Service_YouTube($client);
+
+    // foreach($return_videos as $key => $vid) {
+    // }
+
+    // var_dump($response);
+    return $return_videos;
+}
+
 function youtube($resource, $params)
 {
     $parse = "";
@@ -192,7 +254,7 @@ function itemData($data = [])
     );
 }
 
-function itemDataParams($type, $id, $title, $thumbnail, $desc, $link)
+function itemDataParams($type, $id, $title, $thumbnail, $desc, $link, $channelTitle = "", $channelId = "", $channelLink = "", $vidLength = "")
 {
     return [
         "type" => $type, // channel | video | playlist
@@ -200,7 +262,11 @@ function itemDataParams($type, $id, $title, $thumbnail, $desc, $link)
         "title" => $title,
         "thumbnail" => $thumbnail,
         "desc" => $desc,
-        "link" => $link
+        "link" => $link,
+        "channelTitle" => $channelTitle,
+        "channelId" => $channelId,
+        "channelLink" => $channelLink,
+        "vidLength" => $vidLength
     ];
 }
 
@@ -218,6 +284,9 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                 $thumbnail = thumbnail($item["thumbnail"], $quality);
                 $desc = $item["desc"];
                 $link = $item["link"];
+                $channelTitle = $item["channelTitle"];
+                // $channelId = $item["channelId"];
+                $channelLink = $item["channelLink"];
 
                 // echo $type;
 
@@ -228,10 +297,13 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                 }
 
                 $render .= <<<HTML
-                        <div class="list-item">
-                            <img class="$imgClass" src=$thumbnail>
-                            <p class="list-item-title"><a href=$link>$title</a></p>
-                        </div>
+                        <a class="list-item-container" href=$link>
+                            <div class="list-item">
+                                <img class="$imgClass" src=$thumbnail>
+                                <p class="list-item-title">$title</p>
+                                <a class="list-item-chan-container" href="$channelLink"><p class="list-item-chan">$channelTitle</p></a>
+                            </div>
+                        </a>
                     HTML;
             }
             $render = <<<HTML
@@ -441,7 +513,10 @@ function parse($response, $settings = ["type" => "auto", "getContent" => "true"]
                     $response->snippet->title,
                     $response->snippet->thumbnails,
                     $response->snippet->description,
-                    "/watch?v=" . $response->snippet->resourceId->videoId
+                    "/watch?v=" . $response->snippet->resourceId->videoId,
+                    $response->snippet->channelTitle,
+                    $response->snippet->channelId,
+                    "/channel/" . $response->snippet->channelId
                 ));
                 break;
             case "youtube#searchResult":
