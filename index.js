@@ -343,3 +343,26 @@ function reloadCss() {
     if (link.rel === "stylesheet") link.href += "";
   }
 }
+
+function slide(elem_id = "hor-list") {
+  this.sideScroll(document.getElementById(elem_id), "right", 7, 100, 15);
+}
+
+function slideBack(elem_id = "hor-list") {
+  this.sideScroll(document.getElementById(elem_id), "left", 7, 100, 15);
+}
+
+function sideScroll(element, direction, speed, distance, step) {
+  let scrollAmount = 0;
+  var slideTimer = setInterval(function () {
+    if (direction === "left") {
+      element.scrollLeft -= step;
+    } else {
+      element.scrollLeft += step;
+    }
+    scrollAmount += step;
+    if (scrollAmount >= distance) {
+      window.clearInterval(slideTimer);
+    }
+  }, speed);
+}

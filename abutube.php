@@ -134,19 +134,79 @@ function videos_details($videos)
             $calls += 1;
         }
     }
-    $youtube_path = $_SERVER['DOCUMENT_ROOT'] . "/youtube.php";
-    require_once $youtube_path;
+    // $youtube_path = $_SERVER['DOCUMENT_ROOT'] . "/youtube.php";
+    // require_once $youtube_path;
+    // require_once __DIR__ . '/vendor/autoload.php';
 
-    $q_params = [
-        "id" => $video_ids[0]
-    ];
-    $response = $youtube->videos->listVideos('contentDetails,statistics', $q_params);
+    $i = 0;
+    $details = [];
+    while ($calls > 0) {
+        $details[] = youtube_videos_details([
+            "id" => $video_ids[$i]
+        ])->items;
+        $i += 1;
+        $calls -= 1;
+    }
 
-    print(json_encode($response));
+    $out1 = json_encode($details[0]);
+    $out2 = json_encode($return_videos[0]);
+
+    foreach ($details as $keyGroup => $detailGroup) {
+        // get key.... map to video_ids
+        foreach ($detailGroup as $key => $detail) {
+            foreach ($return_videos as $pos => $video) {
+                $video_detail_id = $detail->id;
+                $video_return_id = $video["id"]; //json_encode($video);
+
+                // echo "<br>$video_detail_id - <textarea> $video_return_id </textarea>";
+
+                if ($video_detail_id == $video_return_id) {
+                    // echo $detail->contentDetails;
+                    // $return_videos[$pos]["details"] = $detail;
+                    $return_videos[$pos]["duration"] = parse_duration($detail->contentDetails->duration); //parse_duration($detail);
+                    break;
+                }
+            }
+        }
+    }
+
+    $out3 = json_encode($return_videos[0]);
+
+    // echo <<<HTML
+    //     <div>
+    //         o1<textarea>$out1</textarea>
+    //         o2<textarea>$out2</textarea>
+    //         o3<textarea>$out3</textarea>
+    //     </div>
+    // HTML;
+
 
     // TODO: place video details in given array
 
     return $return_videos;
+}
+
+function youtube_videos_details($queryParams = [
+    'id' => 'Ks-_Mh1QhMc,c0KYU2j0TM4,eIho2S0ZahI'
+])
+{
+    if (!file_exists(__DIR__ . '/vendor/autoload.php')) {
+        throw new Exception(sprintf('Please run "composer require google/apiclient:~2.0" in "%s"', __DIR__));
+    }
+    require_once __DIR__ . '/vendor/autoload.php';
+    $client = new Google_Client();
+    $client->setApplicationName('API code samples');
+    $client->setScopes([
+        'https://www.googleapis.com/auth/youtube.readonly',
+    ]);
+    $client->setAuthConfig($_SERVER['DOCUMENT_ROOT'] . '/client_secret.json');
+    $client->setAccessType('offline');
+    session_start();
+    $client->setAccessToken($_SESSION['access_token']);
+    $service = new Google_Service_YouTube($client);
+    // $queryParams 
+    $response = $service->videos->listVideos('snippet,contentDetails', $queryParams);
+    return $response;
 }
 
 function youtube($resource, $params)
@@ -225,7 +285,41 @@ function itemData($data = [])
     );
 }
 
-function itemDataParams($type, $id, $title, $thumbnail, $desc, $link, $channelTitle = "", $channelId = "", $channelLink = "", $vidLength = "")
+function parse_duration($d = "PT34H17M3S")
+{
+    $pos = 0;
+    $hr = "";
+    $min = "00";
+    $sec = "00";
+    $d = str_replace("PT", "", $d);
+    $has_h = substr_count($d, "H");
+    $has_m = substr_count($d, "M");
+    $has_s = substr_count($d, "S");
+    if ($has_h > 0) {
+        $len = strpos($d, "H");
+        $hr = substr($d, $pos, $len - $pos);
+        $hr .= ":";
+        $pos = $len + 1;
+    }
+    if ($has_m > 0) {
+        $len = strpos($d, "M");
+        $min = substr($d, $pos, $len - $pos);
+        if ($has_h > 0 && strlen($min) == 1) {
+            $min = "0" . $min;
+        }
+        $pos = $len + 1;
+    }
+    if ($has_s > 0) {
+        $len = strpos($d, "S");
+        $sec = substr($d, $pos, $len - $pos);
+        if ($has_m > 0 && strlen($sec) == 1) {
+            $sec = "0" . $sec;
+        }
+    }
+    return "$hr$min:$sec";
+}
+
+function itemDataParams($type, $id, $title, $thumbnail, $desc, $link, $channelTitle = "", $channelId = "", $channelLink = "", $duration = "")
 {
     return [
         "type" => $type, // channel | video | playlist
@@ -237,13 +331,15 @@ function itemDataParams($type, $id, $title, $thumbnail, $desc, $link, $channelTi
         "channelTitle" => $channelTitle,
         "channelId" => $channelId,
         "channelLink" => $channelLink,
-        "vidLength" => $vidLength
+        "duration" => $duration,
+        "details" => []
     ];
 }
 
 function itemRender($data = [], $layout = "list", $feed_button = false, $quality = "default")
 {
     $render = "";
+
 
     switch ($layout) {
         case "horizontal":
@@ -258,6 +354,7 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                 $channelTitle = $item["channelTitle"];
                 // $channelId = $item["channelId"];
                 $channelLink = $item["channelLink"];
+                $duration = $item["duration"];
 
                 // echo $type;
 
@@ -271,8 +368,9 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                         <a class="list-item-container" href=$link>
                             <div class="list-item">
                                 <img class="$imgClass" src=$thumbnail>
-                                <p class="list-item-title">$title</p>
-                                <a class="list-item-chan-container" href="$channelLink"><p class="list-item-chan">$channelTitle</p></a>
+                                <div class="list-item-dur">$duration</div>
+                                <p class="list-item-title" title='$title'>$title</p>
+                                <a class="list-item-chan-container" href="$channelLink"><p class="list-item-chan">$channelTitle </p></a>
                             </div>
                         </a>
                     HTML;

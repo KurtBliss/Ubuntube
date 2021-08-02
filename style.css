@@ -105,12 +105,20 @@ Body Home
 }
 
 .list-item {
+  position: relative;
   white-space: normal;
   width: 340px;
   display: inline-block;
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: 12px;
+}
+
+.list-item-dur {
+  /* color: darkgray; */
+  position: absolute;
+  bottom: 11px;
+  right: 16px;
 }
 
 .list-item:hover {

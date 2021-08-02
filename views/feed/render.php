@@ -37,6 +37,8 @@ if (isset($JSON->sections)) {
 
         $unsortedItems = videos_details($unsortedItems);
 
+        // echo json_encode($unsortedItems[0]);
+
         shuffle($unsortedItems);
 
         $itemRender = itemRender($unsortedItems, "horizontal", false, "medium");
