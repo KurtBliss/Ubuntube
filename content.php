@@ -14,11 +14,11 @@ $router->map('GET', '/', function () {
     include "views/home.php";
 });
 
-$router->map('GET', '/auth.php', function () {
+$router->map('GET', '/auth', function () {
     $singleton_page = true;
     include "auth.php";
 });
-$router->map('GET', '/auth_process.php', function () {
+$router->map('GET', '/auth_process', function () {
     $singleton_page = true;
     include "auth_process.php";
 });
