@@ -319,11 +319,12 @@ function updateFeedSelect() {
 
 function updateSectionSelect(feed) {
   var feedsObj = feeds();
+  console.log("updateSectionSelect-> ", feed);
   var sections = feedsObj[feed]["sections"];
-  console.log("got", sections);
+  // console.log("got", sections);
   var pickSection = '<option value="-1">As New Section</option>';
   for (const section in sections) {
-    console.log(section);
+    // console.log(section);
     pickSection += "<option value='" + section + "'>";
     pickSection += sections[section]["name"];
     pickSection += "</option>";

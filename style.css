@@ -166,12 +166,13 @@ Body Home
 }
 
 .list-grid-item {
-  display: grid;
-  grid-template-areas:
+  /* display: grid; */
+  /* grid-template-areas:
     "img img img title title title title title"
     "img img img desc  desc  desc  desc  desc"
-    "img img img desc  desc  desc  desc  desc";
+    "img img img desc  desc  desc  desc  desc"; */
 
+  position: relative;
   display: inline-block;
   width: 135px;
   height: 125px;
@@ -180,6 +181,12 @@ Body Home
   border-top-width: 5px;
   background-color: hsl(194, 100%, 97%);
   text-align: center;
+}
+
+.list-grid-item-add {
+  position: absolute;
+  top: 4px;
+  right: 4px;
 }
 
 .list-grid-item-image {

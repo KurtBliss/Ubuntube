@@ -93,7 +93,7 @@ function channel_parse_uploads($response)
 function feed_add_playlist_button($key, $uploadsPlaylist, $title)
 {
     $ren = <<<HTML
-        <select id="select-feed-$key" class="addToFeed" onchange='updateFeedSelect();updateSectionSelect(Object.keys(feeds())[0]);'> 
+        <select id="select-feed-$key" class="addToFeed" onchange='updateSectionSelect(this.value); '> 
                 </select> <select id="select-section-$key" class="addToSection"  > 
                 </select> 
                 <button id="select_feed_button_$key" onclick="feed_add_playlist($key,'$uploadsPlaylist', '$title Uploads')">add to feed </button>
@@ -442,12 +442,13 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
 
                 if ($feed_button) {
                     $render_feed_button = <<<HTML
-                        <button 
+                        <a 
                             id="feed_button_$key" 
+                            href="javascript:void(0)"
                             onclick='feed_add_channel("$id", "feed_sec_$key");
                                 document.getElementById("feed_button_$key").style.display="none";'>
-                                add to feed
-                        </button>
+                                <i class="fas fa-plus-circle"></i>
+                        </a>
                     HTML;
                 }
 
@@ -457,7 +458,7 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                                 <img class="$imgClass list-grid-item-image" src=$thumbnail>
                                 <p class="list-grid-item-title"><a href=$link>$title</a></p>
                                 <!-- <p class="list-grid-item-description">$desc</p> -->
-                                $render_feed_button
+                                <div class="list-grid-item-add">$render_feed_button</div>
                                 <div id="feed_sec_$key"></div>
                             </div>
                         </a>

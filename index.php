@@ -1,6 +1,11 @@
 <?php
-require_once "abutube.php";
+$singleton_page = false;
 require_once "content.php";
+
+if ($singleton_page)
+    exit;
+
+require_once "abutube.php";
 require_once "views/header.php";
 require_once "views/footer.php";
 require_once "views/menu.php";
@@ -19,6 +24,7 @@ echo <<<HTML
         <link rel="stylesheet" type="text/css" href="/style.css">
         <link rel="apple-touch-icon" href="/logo.png">
         <link rel="icon" href="/logo.png">
+        <script src="https://kit.fontawesome.com/a5c87a9067.js" crossorigin="anonymous"></script>
         <script src="/index.js"></script>
         <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
     </head>
