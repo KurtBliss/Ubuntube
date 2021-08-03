@@ -14,14 +14,14 @@ $router->map('GET', '/', function () {
     include "views/home.php";
 });
 
-// $router->map('GET', '/auth', function () {
-//     $singleton_page = true;
-//     include "auth.php";
-// });
-// $router->map('GET', '/auth_process', function () {
-//     $singleton_page = true;
-//     include "auth_process.php";
-// });
+$router->map('GET', '/auth.php', function () {
+    $singleton_page = true;
+    include "auth.php";
+});
+$router->map('GET', '/auth_process.php', function () {
+    $singleton_page = true;
+    include "auth_process.php";
+});
 
 $router->map("GET", "/watch", function () {
     global $title, $website_name;
