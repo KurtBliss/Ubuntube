@@ -6,7 +6,7 @@ session_start();
 
 $client = new Google_Client();
 $client->setAuthConfig('client_secret.json');
-$client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/auth_process');
+$client->setRedirectUri('https://' . $_SERVER['HTTP_HOST'] . '/auth_process');
 $client->addScope(GOOGLE_SERVICE_YOUTUBE::YOUTUBE_FORCE_SSL);
 
 if (!isset($_GET['code'])) {
