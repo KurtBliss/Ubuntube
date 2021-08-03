@@ -2,8 +2,10 @@
 $singleton_page = false;
 require_once "content.php";
 
-if ($singleton_page)
+if ($singleton_page) {
+
     exit;
+}
 
 require_once "abutube.php";
 require_once "views/header.php";
