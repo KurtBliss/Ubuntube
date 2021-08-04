@@ -18,21 +18,21 @@ function onSearch(event) {
   }
 }
 
-function homeLoadFeeds() {
+function homeLoadFeeds(feed_id = "feeds-list") {
   var feedsObj = feeds();
   for (const feed in feedsObj) {
-    appendToHomeFeeds(feedsObj, feed);
+    appendToHomeFeeds(feedsObj, feed, feed_id);
   }
 }
 
-function appendToHomeFeeds(feedsObj, feed) {
+function appendToHomeFeeds(feedsObj, feed, feed_id) {
   appendContainer(
-    '<a class="feed-home" target=_self href="feed/' +
+    '<a class="feed-home" target=_self href="/feed/' +
       feed +
       '">' +
       feedsObj[feed]["name"] +
       "</a>",
-    "feeds-list"
+    feed_id
   );
 }
 
