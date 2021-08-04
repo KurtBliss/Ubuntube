@@ -11,7 +11,7 @@ $client->addScope(GOOGLE_SERVICE_YOUTUBE::YOUTUBE_FORCE_SSL);
 // $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/auth_process.php');
 // $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/auth_process');
 // $client->setRedirectUri('http://127.0.0.1:8080/auth_process');
-$client->setRedirectUri('https://ubuntube.herokuapp.com/');
+$client->setRedirectUri('https://ubuntube.herokuapp.com/auth_process');
 // offline access will give you both an access and refresh token so that
 // your app can refresh the access token without user interaction.
 // $client->setAccessType('offline');
