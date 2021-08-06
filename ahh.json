@@ -1,39 +1,203 @@
 {
-  "type": "youtube#playlistItem",
-  "id": "8WOa99lcspQ",
-  "title": "This is the new normal and it SUCKS!",
-  "thumbnail": {
-    "default": {
-      "url": "https://i.ytimg.com/vi/8WOa99lcspQ/default.jpg",
-      "width": 120,
-      "height": 90
+  "kind": "youtube#channelListResponse",
+  "etag": "hTk4j2fbSMc5QT27m78cbaxk4Gs",
+  "pageInfo": { "totalResults": 5, "resultsPerPage": 5 },
+  "items": [
+    {
+      "kind": "youtube#channel",
+      "etag": "Nb5FPSy7OovG1v2PrCJ25V0GE30",
+      "id": "UCNzszbnvQeFzObW0ghk0Ckw",
+      "snippet": {
+        "title": "Dave's Garage",
+        "description": "Windows History, Windows vs Linux Comparisons, Arduino Project Tutorials, Shop Projects, ESP32 Information and more in Dave's Garage.  With DIY info and practical step by step tutorials.  Uses visuals such as the ChipCam to make complex topics easy to understand.  From hobbyist to engineer, everyone is welcome!",
+        "customUrl": "davesgarage",
+        "publishedAt": "2018-08-17T00:17:45Z",
+        "thumbnails": {
+          "default": {
+            "url": "https://yt3.ggpht.com/5L93CQxZo-_EhDIqIG6KdRMkJ2YBYpusQ8gL3awif3JmRLEJJYPM2bP7M-8TGcfnN2GyVlOWC2w=s88-c-k-c0x00ffffff-no-rj",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "https://yt3.ggpht.com/5L93CQxZo-_EhDIqIG6KdRMkJ2YBYpusQ8gL3awif3JmRLEJJYPM2bP7M-8TGcfnN2GyVlOWC2w=s240-c-k-c0x00ffffff-no-rj",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "https://yt3.ggpht.com/5L93CQxZo-_EhDIqIG6KdRMkJ2YBYpusQ8gL3awif3JmRLEJJYPM2bP7M-8TGcfnN2GyVlOWC2w=s800-c-k-c0x00ffffff-no-rj",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "localized": {
+          "title": "Dave's Garage",
+          "description": "Windows History, Windows vs Linux Comparisons, Arduino Project Tutorials, Shop Projects, ESP32 Information and more in Dave's Garage.  With DIY info and practical step by step tutorials.  Uses visuals such as the ChipCam to make complex topics easy to understand.  From hobbyist to engineer, everyone is welcome!"
+        },
+        "country": "US"
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "favorites": "",
+          "uploads": "UUNzszbnvQeFzObW0ghk0Ckw"
+        }
+      }
     },
-    "medium": {
-      "url": "https://i.ytimg.com/vi/8WOa99lcspQ/mqdefault.jpg",
-      "width": 320,
-      "height": 180
+    {
+      "kind": "youtube#channel",
+      "etag": "alfsX_9B1khImmbJVdKfgn9HXAo",
+      "id": "UCD4EOyXKjfDUhCI6jlOZZYQ",
+      "snippet": {
+        "title": "Eli the Computer Guy",
+        "description": "",
+        "customUrl": "elithecomputerguypage",
+        "publishedAt": "2009-09-23T18:54:58Z",
+        "thumbnails": {
+          "default": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLQ_mwJjaF2wASSEgr5WLsa-SlggnwjxXxo4RAVCqA=s88-c-k-c0x00ffffff-no-rj",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLQ_mwJjaF2wASSEgr5WLsa-SlggnwjxXxo4RAVCqA=s240-c-k-c0x00ffffff-no-rj",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLQ_mwJjaF2wASSEgr5WLsa-SlggnwjxXxo4RAVCqA=s800-c-k-c0x00ffffff-no-rj",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "localized": { "title": "Eli the Computer Guy", "description": "" },
+        "country": "US"
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "favorites": "",
+          "uploads": "UUD4EOyXKjfDUhCI6jlOZZYQ"
+        }
+      }
     },
-    "high": {
-      "url": "https://i.ytimg.com/vi/8WOa99lcspQ/hqdefault.jpg",
-      "width": 480,
-      "height": 360
+    {
+      "kind": "youtube#channel",
+      "etag": "4DhNg2XB_yK-Ey-8KFSEqY7Q9Co",
+      "id": "UCagoIYmo_gO1iVaCeeSikEg",
+      "snippet": {
+        "title": "This Week in Tech",
+        "description": "Your first podcast of the week is the last word in tech. Join the top tech pundits in a roundtable discussion of the latest trends in high tech.\n\nRecords live every Sunday at 5:15pm Eastern / 2:15pm Pacific at https://twit.tv/live",
+        "customUrl": "thisweekintech",
+        "publishedAt": "2008-10-10T15:23:19Z",
+        "thumbnails": {
+          "default": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLQxoxOeQePJJYfLIK_HT-65uW_9zgF2GnA7HrNE=s88-c-k-c0x00ffffff-no-rj",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLQxoxOeQePJJYfLIK_HT-65uW_9zgF2GnA7HrNE=s240-c-k-c0x00ffffff-no-rj",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLQxoxOeQePJJYfLIK_HT-65uW_9zgF2GnA7HrNE=s800-c-k-c0x00ffffff-no-rj",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "localized": {
+          "title": "This Week in Tech",
+          "description": "Your first podcast of the week is the last word in tech. Join the top tech pundits in a roundtable discussion of the latest trends in high tech.\n\nRecords live every Sunday at 5:15pm Eastern / 2:15pm Pacific at https://twit.tv/live"
+        },
+        "country": "US"
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "favorites": "",
+          "uploads": "UUagoIYmo_gO1iVaCeeSikEg"
+        }
+      }
     },
-    "standard": {
-      "url": "https://i.ytimg.com/vi/8WOa99lcspQ/sddefault.jpg",
-      "width": 640,
-      "height": 480
+    {
+      "kind": "youtube#channel",
+      "etag": "HAkIwVe21rl4gK1w2zzeVLx8Du4",
+      "id": "UCl2mFZoRqjw_ELax4Yisf6w",
+      "snippet": {
+        "title": "Louis Rossmann",
+        "description": "I teach Macbook component level logic board repair from a common sense, everyman's perspective. I try to make it seem viable, and entertaining. \n\nI also go over business concepts & philosophy that will be important to running & maintaining a sustainable, profitable business. \n\nYou can read more about our company here & inquire about service. https://www.rossmanngroup.com\n\nWe have a paid forum to provide support to component level technicians https://www.rossmanngroup.com/boards\n\nIf you want a Macbook repair, check us out at https://www.sendyourmacbook.com\n\n\n",
+        "publishedAt": "2011-10-12T03:40:50Z",
+        "thumbnails": {
+          "default": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLT1mCh75yQDUdZX-7yN3QhxvZftXeEbkZ_j8P4B4A=s88-c-k-c0x00ffffff-no-rj",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLT1mCh75yQDUdZX-7yN3QhxvZftXeEbkZ_j8P4B4A=s240-c-k-c0x00ffffff-no-rj",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLT1mCh75yQDUdZX-7yN3QhxvZftXeEbkZ_j8P4B4A=s800-c-k-c0x00ffffff-no-rj",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "localized": {
+          "title": "Louis Rossmann",
+          "description": "I teach Macbook component level logic board repair from a common sense, everyman's perspective. I try to make it seem viable, and entertaining. \n\nI also go over business concepts & philosophy that will be important to running & maintaining a sustainable, profitable business. \n\nYou can read more about our company here & inquire about service. https://www.rossmanngroup.com\n\nWe have a paid forum to provide support to component level technicians https://www.rossmanngroup.com/boards\n\nIf you want a Macbook repair, check us out at https://www.sendyourmacbook.com\n\n\n"
+        },
+        "country": "US"
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "favorites": "",
+          "uploads": "UUl2mFZoRqjw_ELax4Yisf6w"
+        }
+      }
     },
-    "maxres": {
-      "url": "https://i.ytimg.com/vi/8WOa99lcspQ/maxresdefault.jpg",
-      "width": 1280,
-      "height": 720
+    {
+      "kind": "youtube#channel",
+      "etag": "Zc_DLeU_TC2IHp5ieWTOql-GyVQ",
+      "id": "UCXuqSBlHAE6Xw-yeJA0Tunw",
+      "snippet": {
+        "title": "Linus Tech Tips",
+        "description": "Tech can be complicated; we try to make it easy.\n\nLinus Tech Tips is a passionate team of \"professionally curious\" experts in consumer technology and video production which aims to inform and educate people of all ages through entertaining videos. We create product reviews, step-by-step computer build guides, and a variety of other tech-focused projects.\n\nSchedule:\nNew videos every Saturday to Thursday @ 10:00am Pacific\nLive WAN Show podcasts every Friday @ 5:00pm Pacific\n\n",
+        "customUrl": "linustechtips",
+        "publishedAt": "2008-11-25T00:46:52Z",
+        "thumbnails": {
+          "default": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLSGE5pCFbd5alFmWeOJZPNjsEhkN1FCxFdYjaE3Og=s88-c-k-c0x00ffffff-no-rj",
+            "width": 88,
+            "height": 88
+          },
+          "medium": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLSGE5pCFbd5alFmWeOJZPNjsEhkN1FCxFdYjaE3Og=s240-c-k-c0x00ffffff-no-rj",
+            "width": 240,
+            "height": 240
+          },
+          "high": {
+            "url": "https://yt3.ggpht.com/ytc/AKedOLSGE5pCFbd5alFmWeOJZPNjsEhkN1FCxFdYjaE3Og=s800-c-k-c0x00ffffff-no-rj",
+            "width": 800,
+            "height": 800
+          }
+        },
+        "localized": {
+          "title": "Linus Tech Tips",
+          "description": "Tech can be complicated; we try to make it easy.\n\nLinus Tech Tips is a passionate team of \"professionally curious\" experts in consumer technology and video production which aims to inform and educate people of all ages through entertaining videos. We create product reviews, step-by-step computer build guides, and a variety of other tech-focused projects.\n\nSchedule:\nNew videos every Saturday to Thursday @ 10:00am Pacific\nLive WAN Show podcasts every Friday @ 5:00pm Pacific\n\n"
+        },
+        "country": "CA"
+      },
+      "contentDetails": {
+        "relatedPlaylists": {
+          "likes": "",
+          "favorites": "FLXuqSBlHAE6Xw-yeJA0Tunw",
+          "uploads": "UUXuqSBlHAE6Xw-yeJA0Tunw"
+        }
+      }
     }
-  },
-  "desc": "https://youtu.be/QPXKJ6uw488",
-  "link": "/watch?v=8WOa99lcspQ",
-  "channelTitle": "Louis Rossmann",
-  "channelId": "UCl2mFZoRqjw_ELax4Yisf6w",
-  "channelLink": "/channel/UCl2mFZoRqjw_ELax4Yisf6w",
-  "duration": "",
-  "details": []
+  ]
 }

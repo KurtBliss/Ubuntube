@@ -73,8 +73,19 @@ function playlist_items($id, $max = 5)
 
 function channel_data($channelId)
 {
+    if (is_array($channelId)) {
+        $channelIds = "";
+        foreach ($channelId as $chan) {
+            $channelIds .= $chan . ",";
+        }
+        $id_param = $channelIds;
+    } else {
+        $id_param = $channelId;
+    }
+
+
     return youtube("channels", [
-        "id" => $channelId,
+        "id" => $id_param,
         "part" => "snippet,contentDetails"
     ]);
 }
@@ -90,13 +101,21 @@ function channel_parse_uploads($response)
 }
 
 
-function feed_add_playlist_button($key, $uploadsPlaylist, $title)
+function feed_add_playlist_button($key, $uploadsPlaylist, $title, $playlists = false)
 {
+    $func = "feed_add_playlist";
+    $playlist_data = "'$uploadsPlaylist'";
+    if ($playlists) {
+        $func .= "s";
+        $playlist_data = "$uploadsPlaylist";
+    }
+    $onclick = "$func($key,$playlist_data, '$title Uploads')";
     $ren = <<<HTML
-        <select id="select-feed-$key" class="addToFeed" onchange='updateSectionSelect(this.value); '> 
-                </select> <select id="select-section-$key" class="addToSection"  > 
-                </select> 
-                <button id="select_feed_button_$key" onclick="feed_add_playlist($key,'$uploadsPlaylist', '$title Uploads')">add to feed </button>
+        <div class="addToFeedContainer">
+            <select id="select-feed-$key" class="addToFeed" onchange='updateSectionSelect(this.value); '> </select> 
+            <select id="select-section-$key" class="addToSection"  > </select> 
+            <button id="select_feed_button_$key" onclick=$onclick>add to feed </button>
+        </div>
     HTML;
 
     return $ren;
@@ -445,9 +464,8 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                         <a 
                             id="feed_button_$key" 
                             href="javascript:void(0)"
-                            onclick='feed_add_channel("$id", "feed_sec_$key");
-                                document.getElementById("feed_button_$key").style.display="none";'>
-                                <i class="fas fa-plus-circle"></i>
+                            onclick='feed_que_button("$id", "feed_button_$key", "feed_button_i_$key", "$title");'>
+                                <i class="fas fa-plus-circle" id="feed_button_i_$key"></i>
                         </a>
                     HTML;
                 }

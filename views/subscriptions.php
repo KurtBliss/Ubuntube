@@ -23,10 +23,25 @@ try {
     header('Location: ' . filter_var($redirect_uri, FILTER_SANITIZE_URL));
 }
 
+$script = <<<JS
+    var que = [];
+    var que_name = "";
+JS;
+
+$feed_button = feed_add_playlist_button("main", "que", "que_name", true);
+
+$render_add_to_feed = <<<HTML
+
+$feed_button
+
+HTML;
+
 $content = <<<HTML
     <main>
+        <script>$script</script>
         <section>
         $render
+        $render_add_to_feed
         </section>
     </main>
 HTML;

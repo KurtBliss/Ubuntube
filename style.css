@@ -521,3 +521,21 @@ footer {
   width: 100%;
   height: 100%;
 }
+
+.addToFeedContainer {
+  /* position: absolute;
+  top: 10px;
+  text-align: center;
+  left: auto;
+  right: auto;
+  margin: 0 auto;
+  clear: left; */
+  height: auto;
+  background-color: black;
+  z-index: 1000;
+  padding: 5px;
+}
+
+.plusActive {
+  color: blue;
+}

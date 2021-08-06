@@ -143,6 +143,49 @@ function feed_add_playlist(getId, playlistId, sectionName) {
   feeds(feedsObj);
 }
 
+function feed_add_playlists(getId, playlistIds, sectionName) {
+  var feedsObj = feeds();
+  var feed = document.getElementById("select-feed-" + getId).value;
+  var section = document.getElementById("select-section-" + getId).value;
+
+  playlistIds.forEach((elem) => {
+    if (section == "-1") {
+      feedsObj[feed]["sections"].push({
+        name: sectionName,
+        playlists: [elem],
+      });
+      section = sectionName;
+    } else {
+      console.log("playlist added", feed, section);
+      feedsObj[feed]["sections"][section].playlists.push(elem);
+    }
+  });
+
+  feeds(feedsObj);
+}
+
+function feed_que_button(channelId, buttonId, buttonIcon, channelName) {
+  var button = document.getElementById(buttonId);
+  var icon = document.getElementById(buttonIcon);
+  if (icon.style.color == "blue") {
+    icon.style.color = "black";
+
+    var index = this.que.indexOf(channelId);
+    if (index !== -1) {
+      this.que.splice(index, 1);
+    }
+    if (que.length == 0) {
+      que_name = "";
+    }
+  } else {
+    icon.style.color = "blue";
+    que[que.length] = channelId;
+    if (que_name == "") {
+      que_name = channelName + " Uploads";
+    }
+  }
+}
+
 function feed_add_channel(channelId, container) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -151,6 +194,16 @@ function feed_add_channel(channelId, container) {
       console.log("response feed_add_channel status 200", this.responseText);
 
       document.getElementById(container).innerHTML = this.responseText;
+
+      var playlists = [];
+
+      this.responseText["items"].forEach((element) => {
+        playlists.push(
+          element["contentDetails"]["relatedPlaylists"]["uploads"]
+        );
+      });
+
+      feed_add_playlists("main", playlists, sectionName);
 
       updateFeedSelect();
       updateSectionSelect(Object.keys(feeds())[0]);
@@ -161,6 +214,36 @@ function feed_add_channel(channelId, container) {
   xhttp.open("POST", "/channel-playlist.php", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("channelId=" + channelId);
+}
+
+function feed_add_channels(channelIds, container) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      // document.getElementById("feed-container").innerHTML =
+      console.log("response feed_add_channel status 200", this.responseText);
+      if (typeof container === "string" || container instanceof String) {
+        document.getElementById(container).innerHTML = this.responseText;
+      } else {
+        container.innerHTML = this.responseText;
+      }
+    }
+  };
+  xhttp.open("POST", "/channel-playlist.php", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  var id_param = "";
+
+  console.log(channelIds);
+
+  channelIds.forEach((elem) => {
+    console.log(elem);
+    id_param += elem + ",";
+  });
+
+  console.log("id_param", id_param);
+
+  xhttp.send("channelIds=" + id_param);
 }
 
 function feedRemove(feed) {
