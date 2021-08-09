@@ -13,5 +13,11 @@ if (array_key_exists('channelId', $_POST)) {
     $channelId = $_POST["channelIds"];
     $response = channel_data($channelId);
 
-    echo json_encode($response);
+    $playlist = [];
+    foreach ($response->items as $res) {
+
+        $playlist[] = $res->contentDetails->relatedPlaylists->uploads;
+    }
+
+    echo json_encode($playlist);
 }

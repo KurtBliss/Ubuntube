@@ -25,7 +25,21 @@ function homeLoadFeeds(feed_id = "feeds-list") {
   }
 }
 
-function appendToHomeFeeds(feedsObj, feed, feed_id) {
+// function appendToHomeFeeds(feedsObj, feed, feed_id) {
+//   console.log("appendToHomeFeeds > feedsObj", feedsObj);
+//   console.log("appendToHomeFeeds > feed", feed);
+//   console.log("appendToHomeFeeds > feed_id", feed_id);
+//   appendContainer(
+//     '<a class="feed-home" target=_self href="/feed/' +
+//       feed +
+//       '">' +
+//       feedsObj[feed]["name"] +
+//       "</a>",
+//     feed_id
+//   );
+// }
+
+function appendToHomeFeeds(feedsObj, feed, feed_id = "feeds-list") {
   appendContainer(
     '<a class="feed-home" target=_self href="/feed/' +
       feed +
@@ -144,20 +158,36 @@ function feed_add_playlist(getId, playlistId, sectionName) {
 }
 
 function feed_add_playlists(getId, playlistIds, sectionName) {
+  console.log("feed_add_playlists", getId, playlistIds, sectionName);
+
   var feedsObj = feeds();
   var feed = document.getElementById("select-feed-" + getId).value;
   var section = document.getElementById("select-section-" + getId).value;
 
   playlistIds.forEach((elem) => {
+    console.log("elem", elem);
     if (section == "-1") {
+      console.log("section is -1");
       feedsObj[feed]["sections"].push({
         name: sectionName,
         playlists: [elem],
       });
-      section = sectionName;
+      section = feedsObj[feed]["sections"].length - 1;
+      // section = sectionName;
+      console.log("Section -1 complete");
     } else {
-      console.log("playlist added", feed, section);
+      // console.log("feed", feed);
+      // console.log("section", section);
+      // console.log("feedsObj", feedsObj);
+      console.log('feedsObj[feed]["sections"]', feedsObj[feed]["sections"]);
+      // console.log(
+      //   'feedsObj[feed]["sections"].playlists',
+      //   feedsObj[feed]["sections"].playlists
+      // );
       feedsObj[feed]["sections"][section].playlists.push(elem);
+      console.log("Else  complete");
+
+      // console.log("playlist added", feed, section);
     }
   });
 
@@ -191,13 +221,17 @@ function feed_add_channel(channelId, container) {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       // document.getElementById("feed-container").innerHTML =
-      console.log("response feed_add_channel status 200", this.responseText);
+      // console.log("response feed_add_channel status 200", this.responseText);
 
       document.getElementById(container).innerHTML = this.responseText;
 
       var playlists = [];
 
-      this.responseText["items"].forEach((element) => {
+      var res = json_decode(this.responseText);
+
+      print("res", res);
+
+      res.forEach((element) => {
         playlists.push(
           element["contentDetails"]["relatedPlaylists"]["uploads"]
         );
@@ -208,7 +242,7 @@ function feed_add_channel(channelId, container) {
       updateFeedSelect();
       updateSectionSelect(Object.keys(feeds())[0]);
 
-      href4ios();
+      // href4ios();
     }
   };
   xhttp.open("POST", "/channel-playlist.php", true);
@@ -216,33 +250,28 @@ function feed_add_channel(channelId, container) {
   xhttp.send("channelId=" + channelId);
 }
 
-function feed_add_channels(channelIds, container) {
+function feed_add_channels(getId, channelIds, sectionName) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
-      // document.getElementById("feed-container").innerHTML =
-      console.log("response feed_add_channel status 200", this.responseText);
-      if (typeof container === "string" || container instanceof String) {
-        document.getElementById(container).innerHTML = this.responseText;
-      } else {
-        container.innerHTML = this.responseText;
-      }
+      var playlists = [];
+      var res = JSON.parse(this.responseText);
+      res.forEach((element) => {
+        playlists.push(element);
+      });
+
+      feed_add_playlists(getId, playlists, sectionName);
     }
   };
   xhttp.open("POST", "/channel-playlist.php", true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
   var id_param = "";
-
   console.log(channelIds);
-
   channelIds.forEach((elem) => {
     console.log(elem);
     id_param += elem + ",";
   });
-
   console.log("id_param", id_param);
-
   xhttp.send("channelIds=" + id_param);
 }
 
@@ -263,7 +292,7 @@ function renderFeed(data, feedId, edit = false) {
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       document.getElementById("feed-container").innerHTML = this.responseText;
-      href4ios();
+      // href4ios();
     }
   };
   if (edit) {
@@ -278,6 +307,9 @@ function renderFeed(data, feedId, edit = false) {
 }
 
 function appendContainer(append, id) {
+  // console.log("id", id);
+  // console.log("append", append);
+  // console.log("document.getElementById(id)", document.getElementById(id));
   document.getElementById(id).innerHTML += append;
 }
 
@@ -300,22 +332,22 @@ function loadObject(name) {
 
 */
 
-function href4ios() {
-  var a = document.getElementsByTagName("a");
-  for (var i = 0; i < a.length; i++) {
-    if (a[i].onclick == null)
-      a[i].onclick = function () {
-        var href = this.getAttribute("href");
-        if (href != null) {
-          console.log(href);
-          if (!href.includes("http")) {
-            window.location = this.getAttribute("href");
-            return false;
-          }
-        }
-      };
-  }
-}
+// function href4ios() {
+//   var a = document.getElementsByTagName("a");
+//   for (var i = 0; i < a.length; i++) {
+//     if (a[i].onclick == null)
+//       a[i].onclick = function () {
+//         var href = this.getAttribute("href");
+//         if (href != null) {
+//           console.log(href);
+//           if (!href.includes("http")) {
+//             window.location = this.getAttribute("href");
+//             return false;
+//           }
+//         }
+//       };
+//   }
+// }
 
 /*
   google auth       

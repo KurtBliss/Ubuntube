@@ -32,7 +32,7 @@ if ($singleton_page) {
             $content
             $footer
             <script>
-                this.href4ios(); 
+                // this.href4ios(); 
             </script>
         </body>
     </html>

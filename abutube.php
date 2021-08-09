@@ -103,22 +103,51 @@ function channel_parse_uploads($response)
 
 function feed_add_playlist_button($key, $uploadsPlaylist, $title, $playlists = false)
 {
-    $func = "feed_add_playlist";
-    $playlist_data = "'$uploadsPlaylist'";
     if ($playlists) {
-        $func .= "s";
-        $playlist_data = "$uploadsPlaylist";
-    }
-    $onclick = "$func($key,$playlist_data, '$title Uploads')";
-    $ren = <<<HTML
-        <div class="addToFeedContainer">
-            <select id="select-feed-$key" class="addToFeed" onchange='updateSectionSelect(this.value); '> </select> 
-            <select id="select-section-$key" class="addToSection"  > </select> 
-            <button id="select_feed_button_$key" onclick=$onclick>add to feed </button>
-        </div>
-    HTML;
+        $ren = <<<HTML
+            <select id="select-feed-$key" class="addToFeed" onchange='updateSectionSelect(this.value); '> 
+                    </select> <select id="select-section-$key" class="addToSection"  > 
+                    </select> 
+                    <button id="select_feed_button_$key" onclick="feed_add_channels($key, que, que_name, true)">add to feed </button>
+        HTML;
 
-    return $ren;
+        return $ren;
+    } else {
+        $ren = <<<HTML
+            <select id="select-feed-$key" class="addToFeed" onchange='updateSectionSelect(this.value); '> 
+                    </select> <select id="select-section-$key" class="addToSection"  > 
+                    </select> 
+                    <button id="select_feed_button_$key" onclick="feed_add_playlist($key,'$uploadsPlaylist', '$title Uploads')">add to feed </button>
+        HTML;
+
+        return $ren;
+    }
+
+    //    
+    // <<<HTML
+    //     <button id="select_feed_button_main" onclick="feed_add_playlists(main,que," 'que_name="" uploads')="">add to feed </button>
+    // HTML;
+
+    //     $func = "feed_add_playlist";
+    //     $playlist_data = "'$uploadsPlaylist'";
+    //     if ($playlists) {
+    //         $func .= "s";
+    //         $playlist_data = "$uploadsPlaylist";
+    //     }
+
+    //     $onclick = "$func('$key',$playlist_data, '$title Uploads')";
+
+    //     $ren = <<<HTML
+    //         <div class="addToFeedContainer">
+    //             <select id="select-feed-$key" class="addToFeed" onchange='updateSectionSelect(this.value); '> </select> 
+    //             <select id="select-section-$key" class="addToSection"  > </select> 
+
+    //             <button id="select_feed_button_$key" onclick=$onclick>add to feed </button>
+
+    //         </div>
+    //     HTML;
+
+    //     return $ren;
 }
 
 function subscriptions($token)

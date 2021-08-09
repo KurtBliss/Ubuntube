@@ -28,7 +28,12 @@ $script = <<<JS
     var que_name = "";
 JS;
 
-$feed_button = feed_add_playlist_button("main", "que", "que_name", true);
+$script_end = <<<JS
+    updateFeedSelect();
+    updateSectionSelect(Object.keys(feeds())[0]);
+JS;
+
+$feed_button = feed_add_playlist_button(0, "que", "que_name", true);
 
 $render_add_to_feed = <<<HTML
 
@@ -43,5 +48,6 @@ $content = <<<HTML
         $render
         $render_add_to_feed
         </section>
+        <script>$script_end</script>
     </main>
 HTML;
