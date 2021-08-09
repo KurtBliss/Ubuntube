@@ -173,21 +173,9 @@ function feed_add_playlists(getId, playlistIds, sectionName) {
         playlists: [elem],
       });
       section = feedsObj[feed]["sections"].length - 1;
-      // section = sectionName;
       console.log("Section -1 complete");
     } else {
-      // console.log("feed", feed);
-      // console.log("section", section);
-      // console.log("feedsObj", feedsObj);
-      console.log('feedsObj[feed]["sections"]', feedsObj[feed]["sections"]);
-      // console.log(
-      //   'feedsObj[feed]["sections"].playlists',
-      //   feedsObj[feed]["sections"].playlists
-      // );
       feedsObj[feed]["sections"][section].playlists.push(elem);
-      console.log("Else  complete");
-
-      // console.log("playlist added", feed, section);
     }
   });
 

@@ -36,9 +36,9 @@ JS;
 $feed_button = feed_add_playlist_button(0, "que", "que_name", true);
 
 $render_add_to_feed = <<<HTML
-
-$feed_button
-
+<div class="addToFeedContainer">
+    $feed_button
+</div>
 HTML;
 
 $content = <<<HTML

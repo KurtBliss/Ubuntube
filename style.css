@@ -523,13 +523,13 @@ footer {
 }
 
 .addToFeedContainer {
-  /* position: absolute;
-  top: 10px;
+  position: fixed;
+  bottom: 30px;
   text-align: center;
   left: auto;
   right: auto;
   margin: 0 auto;
-  clear: left; */
+  clear: left;
   height: auto;
   background-color: black;
   z-index: 1000;
