@@ -372,12 +372,13 @@ function itemDataParams($type, $id, $title, $thumbnail, $desc, $link, $channelTi
     return [
         "type" => $type, // channel | video | playlist
         "id" => $id,
+        // "title" => str_replace('"', '', str_replace("'", "", $title)),
         "title" => $title,
         "thumbnail" => $thumbnail,
         "desc" => $desc,
         "link" => $link,
         "channelTitle" => $channelTitle,
-        "channelId" => $channelId,
+        "channelId" =>   $channelId,
         "channelLink" => $channelLink,
         "duration" => $duration,
         "details" => []
@@ -396,6 +397,9 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                 $type = $item["type"];
                 $id = $item["id"];
                 $title = $item["title"];
+                // $title = str_replace("'", "\\'", $item["title"]);
+                // $title = str_replace('"', '\\"', $title);
+
                 $thumbnail = thumbnail($item["thumbnail"], $quality);
                 $desc = $item["desc"];
                 $link = $item["link"];
@@ -418,7 +422,7 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                                 <img class="$imgClass" src=$thumbnail>
                                 <div class="list-item-dur">$duration</div>
                                 <p class="list-item-title" title='$title'>$title</p>
-                                <a class="list-item-chan-container" href="$channelLink"><p class="list-item-chan">$channelTitle </p></a>
+                                <a class="list-item-chan-container" href="$channelLink"><p class="list-item-chan" title='$channelTitle'>$channelTitle </p></a>
                             </div>
                         </a>
                     HTML;
@@ -474,6 +478,7 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                 $type = $item["type"];
                 $id = $item["id"];
                 $title = $item["title"];
+                $titleL = str_replace('"', '', str_replace("'", "", $item["title"]));
                 $thumbnail = $thumbnail = thumbnail($item["thumbnail"], $quality); //$item["thumbnail"];
                 $desc = $item["desc"];
                 $link = $item["link"];
@@ -493,7 +498,7 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                         <a 
                             id="feed_button_$key" 
                             href="javascript:void(0)"
-                            onclick='feed_que_button("$id", "feed_button_$key", "feed_button_i_$key", "$title");'>
+                            onclick='feed_que_button("$id", "feed_button_$key", "feed_button_i_$key", "$titleL");'>
                                 <i class="fas fa-plus-circle" id="feed_button_i_$key"></i>
                         </a>
                     HTML;
@@ -503,7 +508,7 @@ function itemRender($data = [], $layout = "list", $feed_button = false, $quality
                         <a href=$link>
                             <div class="list-grid-item">
                                 <img class="$imgClass list-grid-item-image" src=$thumbnail>
-                                <p class="list-grid-item-title"><a href=$link>$title</a></p>
+                                <p class="list-grid-item-title"><a href=$link title='$title'>$title</a></p>
                                 <!-- <p class="list-grid-item-description">$desc</p> -->
                                 <div class="list-grid-item-add">$render_feed_button</div>
                                 <div id="feed_sec_$key"></div>
